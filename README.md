@@ -1,0 +1,2 @@
+# slave-module
+Slave module

@@ -1,2 +1,1 @@
-# slave-module
-Slave module
+# Slave module

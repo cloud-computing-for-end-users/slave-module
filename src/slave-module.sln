@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "screen-capture-api", "screen-capture-api\screen-capture-api.csproj", "{CFE26CE5-341F-493E-A4D8-89924F0EC56F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-api", "screen-capture-api\screen-capture-api.csproj", "{CFE26CE5-341F-493E-A4D8-89924F0EC56F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "screen-capture-api-unit-test", "screen-capture-api-unit-test\screen-capture-api-unit-test.csproj", "{CBB345E3-F18C-42DF-9501-475461D0ABF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-api-unit-test", "screen-capture-api-unit-test\screen-capture-api-unit-test.csproj", "{CBB345E3-F18C-42DF-9501-475461D0ABF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mouse-control-api", "mouse-control-api\mouse-control-api.csproj", "{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseControlApiTest", "MouseControlApiTest\MouseControlApiTest.csproj", "{3741344E-A280-4811-B44D-5766BCB62E5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{CBB345E3-F18C-42DF-9501-475461D0ABF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBB345E3-F18C-42DF-9501-475461D0ABF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBB345E3-F18C-42DF-9501-475461D0ABF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3741344E-A280-4811-B44D-5766BCB62E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3741344E-A280-4811-B44D-5766BCB62E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3741344E-A280-4811-B44D-5766BCB62E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3741344E-A280-4811-B44D-5766BCB62E5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

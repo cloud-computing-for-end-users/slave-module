@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using screen_capture_api;
 
@@ -16,10 +17,8 @@ namespace Tests
         [Test]
         public void Test2()
         {
-            //sc.LaunchCommandLineApp();
-            //sc.GetWindowPosition();
-            sc.PositionWindow();
+            var path = sc.CaptureScreen("Notepad++");
+            Console.WriteLine(path);
         }
-
     }
 }

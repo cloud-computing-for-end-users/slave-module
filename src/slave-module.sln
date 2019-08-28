@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-api-unit-tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mouse-control-api", "mouse-control-api\mouse-control-api.csproj", "{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MouseControlApiTest", "MouseControlApiTest\MouseControlApiTest.csproj", "{3741344E-A280-4811-B44D-5766BCB62E5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mouse-control-api-test", "MouseControlApiTest\mouse-control-api-test.csproj", "{3741344E-A280-4811-B44D-5766BCB62E5A}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PyAutoGuiSocketWrapper", "PyAutoGuiSocketWrapper\PyAutoGuiSocketWrapper.pyproj", "{90D743C4-4A74-4294-A4C6-7BD47E28A920}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "py-auto-gui-socket-wrapper", "PyAutoGuiSocketWrapper\py-auto-gui-socket-wrapper.pyproj", "{90D743C4-4A74-4294-A4C6-7BD47E28A920}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

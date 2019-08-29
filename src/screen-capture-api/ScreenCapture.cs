@@ -7,7 +7,7 @@ namespace screen_capture_api
 {
     public class ScreenCapture
     {
-        const string imgPath = @"img.jpg";
+        const string imgPath = @"img.png";
 
         public PathToScreen CaptureScreen(string appName)
         {

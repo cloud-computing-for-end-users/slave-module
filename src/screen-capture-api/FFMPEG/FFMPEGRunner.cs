@@ -18,6 +18,10 @@ namespace screen_capture_api.FFMPEG
                 Arguments = new FFMPEGArguments().GetArguments(os, windowPosition, imgPath)
             };
 
+            #if DEBUG
+            Console.WriteLine(startInfo.Arguments);
+            #endif
+            
             try
             {
                 // Start the process with the info we specified.

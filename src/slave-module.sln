@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-api-unit-tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mouse-control-api", "mouse-control-api\mouse-control-api.csproj", "{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mouse-control-api-test", "MouseControlApiTest\mouse-control-api-test.csproj", "{3741344E-A280-4811-B44D-5766BCB62E5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mouse-control-api-test", "mouse-control-api-test\mouse-control-api-test.csproj", "{3741344E-A280-4811-B44D-5766BCB62E5A}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "py-auto-gui-socket-wrapper", "PyAutoGuiSocketWrapper\py-auto-gui-socket-wrapper.pyproj", "{90D743C4-4A74-4294-A4C6-7BD47E28A920}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "py-auto-gui-socket-wrapper", "py-auto-gui-socket-wrapper\py-auto-gui-socket-wrapper.pyproj", "{90D743C4-4A74-4294-A4C6-7BD47E28A920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "screen-capture-api-server-socket-listener", "screen-capture-api-server-socket-listener\screen-capture-api-server-socket-listener.csproj", "{A6189528-6903-41F2-A79A-F901BA05F90B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{3741344E-A280-4811-B44D-5766BCB62E5A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90D743C4-4A74-4294-A4C6-7BD47E28A920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90D743C4-4A74-4294-A4C6-7BD47E28A920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6189528-6903-41F2-A79A-F901BA05F90B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6189528-6903-41F2-A79A-F901BA05F90B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6189528-6903-41F2-A79A-F901BA05F90B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6189528-6903-41F2-A79A-F901BA05F90B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

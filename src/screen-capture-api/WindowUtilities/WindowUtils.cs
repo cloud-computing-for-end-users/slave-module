@@ -34,9 +34,9 @@ namespace screen_capture_api.WindowUtilities
         public void PositionWindow(IntPtr window)
         {
             // Set window as topmost
-            SetWindowPos(window, new IntPtr(-1), 100, 100, 0, 0, (uint) (SWP_NOSIZE | SWP_DRAWFRAME | SWP_SHOWWINDOW));
+            SetWindowPos(window, new IntPtr(-1), 0, 0, 0, 0, (uint) (SWP_NOSIZE | SWP_DRAWFRAME | SWP_SHOWWINDOW));
             // Reset window as non-topmost so it stays on top but does not stay on top when non activate
-            SetWindowPos(window, new IntPtr(-2), 100, 100, 0, 0, (uint) (SWP_NOSIZE | SWP_DRAWFRAME | SWP_SHOWWINDOW));
+            SetWindowPos(window, new IntPtr(-2), 0, 0, 0, 0, (uint) (SWP_NOSIZE | SWP_DRAWFRAME | SWP_SHOWWINDOW));
         }
 
         private float GetScalingFactor()

@@ -3,6 +3,7 @@ using screen_capture_api.WindowUtilities;
 
 namespace screen_capture_api.FFMPEG
 {
+    [Obsolete]
     public class FFMPEGArguments
     {
         private int DefaultFramerate = 24;

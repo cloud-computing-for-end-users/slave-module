@@ -5,6 +5,7 @@ using screen_capture_api.WindowUtilities;
 
 namespace screen_capture_api.FFMPEG
 {
+    [Obsolete]
     public class FFMPEGRunner
     {
         public void RunFFMPEG(OS os, WindowPosition windowPosition, string imgPath)

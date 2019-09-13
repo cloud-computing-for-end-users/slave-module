@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\mouse-control-api\mouse-control-api.csproj" />
+    <ProjectReference Include="..\mouse-control-api\slave-control-api.csproj" />
   </ItemGroup>
 
 </Project>

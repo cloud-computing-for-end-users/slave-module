@@ -7,6 +7,7 @@ using System.Net.Sockets;
 
 namespace mouse_control_api
 {
+    [Obsolete]
     public class MouseControlApi
     {
         //non static start

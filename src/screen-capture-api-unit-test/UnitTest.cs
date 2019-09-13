@@ -9,6 +9,7 @@ using screen_capture_api;
 
 namespace Tests
 {
+    [Obsolete]
     public class Tests
     {
         ScreenCapture sc;
@@ -22,8 +23,8 @@ namespace Tests
         //[Test]
         public void Test2()
         {
-            var path = sc.CaptureScreen("Notepad++");
-            Console.WriteLine(path);
+            //var path = sc.CaptureScreen("Notepad++");
+            //Console.WriteLine(path);
         }
 
         //[Test]

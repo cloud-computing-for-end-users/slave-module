@@ -5,6 +5,7 @@ using System.Text;
 
 namespace screen_capture_api_server_socket_listener
 {
+    [Obsolete]
     class Program
     {
         static void Main(string[] args)

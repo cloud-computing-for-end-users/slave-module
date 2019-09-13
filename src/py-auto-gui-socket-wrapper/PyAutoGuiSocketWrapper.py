@@ -9,6 +9,7 @@ sys.path.append('.\\..\\mouse-control-api\\bin\\Debug\\netcoreapp2.1\\pyautogui'
 import pyautogui
 import socket
 
+port = 60606
 
 
 
@@ -72,11 +73,11 @@ def HandleCommandCall(command):
 
 serverSocket = socket.socket()
 print ("Socket successfully created")
-port = 60606
 
 serverSocket.bind(('',port))
 print ("socket binded to: " ,port)
 serverSocket.listen(5)
+
 
 # will only accept one tcp connection at a time
 while True:

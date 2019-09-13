@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>slave_controller</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetMQ" Version="4.0.0.239-pre" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\mouse-control-api\slave-control-api.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="client-slave-message-communication">
+      <HintPath>..\..\..\utility-netmq-protocol\src\protocol\client-slave-message-communication\bin\Debug\netcoreapp2.2\client-slave-message-communication.dll</HintPath>
+    </Reference>
+    <Reference Include="custom-message-based-implementation">
+      <HintPath>..\..\..\utility-netmq-protocol\src\protocol\custom-message-based-implementation\bin\Debug\netcoreapp2.2\custom-message-based-implementation.dll</HintPath>
+    </Reference>
+    <Reference Include="message-based-communication">
+      <HintPath>..\..\..\utility-netmq-protocol\src\protocol\message-based-communication\bin\Debug\netcoreapp2.2\message-based-communication.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

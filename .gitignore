@@ -60,3 +60,6 @@ _ReSharper*/
 *.nuget.props
 *.nuget.targets
 
+
+#pycharm
+.idea

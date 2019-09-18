@@ -15,7 +15,7 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "py-auto-gui-socket-wrapper"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-api-server-socket-listener", "screen-capture-api-server-socket-listener\screen-capture-api-server-socket-listener.csproj", "{A6189528-6903-41F2-A79A-F901BA05F90B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "slave-controller", "slave-controller\slave-controller.csproj", "{A3E33D05-85CA-48D9-B14E-E2E865A8EE6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "slave-controller", "slave-controller\slave-controller.csproj", "{A3E33D05-85CA-48D9-B14E-E2E865A8EE6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

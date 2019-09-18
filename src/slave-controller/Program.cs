@@ -21,10 +21,9 @@ namespace slave_controller
                         Port = new Port() { ThePort = 10142 }
                     };
 
-                    var pyAutoGui = new PythonAutoGUIWrapper(new Port() { ThePort = 60606 });//TODO FIX
 
 
-                    var slaveController = new SlaveController(pyAutoGui, new Port() { ThePort = 10143 }, new ModuleType() { TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE }, new client_slave_message_communication.encoding.CustomEncoding());
+                    var slaveController = new SlaveController(new Port() { ThePort = 60606 }, new Port() { ThePort = 10143 }, new ModuleType() { TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE }, new client_slave_message_communication.encoding.CustomEncoding());
                     slaveController.Setup(slaveCommInfo, new Port() { ThePort = 10143 }, slaveCommInfo, new client_slave_message_communication.encoding.CustomEncoding());
 
                     Console.WriteLine("The slave controller started without experiencing any exceptions");

@@ -3,6 +3,8 @@ import sys
 import os
 # used to point to the location of the PyAutoGui library
 
+#this is the python part of the mouse controller api
+
 print(os.getcwd())
 sys.path.append('.\\..\\mouse-control-api\\bin\\Debug\\netcoreapp2.1\\pyautogui')
 

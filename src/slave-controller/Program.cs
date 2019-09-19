@@ -17,7 +17,7 @@ namespace slave_controller
 
                     var slaveCommInfo = new ConnectionInformation()
                     {
-                        IP = new IP() { TheIP = "127.0.0.1" },
+                        IP = new IP() { TheIP = "10.152.212.11" },
                         Port = new Port() { ThePort = 10142 }
                     };
 

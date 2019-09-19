@@ -17,6 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-api-server-s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "slave-controller", "slave-controller\slave-controller.csproj", "{A3E33D05-85CA-48D9-B14E-E2E865A8EE6F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "message-based-communication", "..\..\utility-netmq-protocol\src\protocol\message-based-communication\message-based-communication.csproj", "{07E781D7-4EA1-446B-8C92-5E88E8A0FDC0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "custom-message-based-implementation", "..\..\utility-netmq-protocol\src\protocol\custom-message-based-implementation\custom-message-based-implementation.csproj", "{8A327BE5-E291-4DDB-ABC2-552952ADA2DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "client-slave-message-communication", "..\..\utility-netmq-protocol\src\protocol\client-slave-message-communication\client-slave-message-communication.csproj", "{68C3A069-C5C4-4376-9537-04240FC44419}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +55,18 @@ Global
 		{A3E33D05-85CA-48D9-B14E-E2E865A8EE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3E33D05-85CA-48D9-B14E-E2E865A8EE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3E33D05-85CA-48D9-B14E-E2E865A8EE6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07E781D7-4EA1-446B-8C92-5E88E8A0FDC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E781D7-4EA1-446B-8C92-5E88E8A0FDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E781D7-4EA1-446B-8C92-5E88E8A0FDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E781D7-4EA1-446B-8C92-5E88E8A0FDC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A327BE5-E291-4DDB-ABC2-552952ADA2DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A327BE5-E291-4DDB-ABC2-552952ADA2DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A327BE5-E291-4DDB-ABC2-552952ADA2DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A327BE5-E291-4DDB-ABC2-552952ADA2DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68C3A069-C5C4-4376-9537-04240FC44419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68C3A069-C5C4-4376-9537-04240FC44419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68C3A069-C5C4-4376-9537-04240FC44419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68C3A069-C5C4-4376-9537-04240FC44419}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

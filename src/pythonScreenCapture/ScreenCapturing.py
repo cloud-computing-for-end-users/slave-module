@@ -1,7 +1,7 @@
 
 import sys
 # used to point to the location of the PyAutoGui library
-sys.path.append('C:\\Users\\MSI\\Desktop\\module')
+sys.path.append('.\\pyAutoGui\\')
 import pyautogui
 import socket
 
@@ -56,7 +56,8 @@ def threadSendToClient():
             theImageSize = (len(data)).to_bytes(4, byteorder="little", signed=True)
             print("image size in bytes: " + str(theImageSize))
             conn.send(theImageSize)
-            conn.send(data)
+            sentData = conn.send(data)
+            print('The amount of the data that was sent: ' + str(sentData))
             print("finished sending a file to the client")
 
 

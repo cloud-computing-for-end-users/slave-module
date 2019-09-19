@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-api", "scree
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-api-unit-test", "screen-capture-api-unit-test\screen-capture-api-unit-test.csproj", "{CBB345E3-F18C-42DF-9501-475461D0ABF7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "slave-control-api", "mouse-control-api\slave-control-api.csproj", "{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mouse-control-api-test", "mouse-control-api-test\mouse-control-api-test.csproj", "{3741344E-A280-4811-B44D-5766BCB62E5A}"
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "py-auto-gui-socket-wrapper", "py-auto-gui-socket-wrapper\py-auto-gui-socket-wrapper.pyproj", "{90D743C4-4A74-4294-A4C6-7BD47E28A920}"
@@ -22,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "custom-message-based-implementation", "..\..\utility-netmq-protocol\src\protocol\custom-message-based-implementation\custom-message-based-implementation.csproj", "{8A327BE5-E291-4DDB-ABC2-552952ADA2DD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "client-slave-message-communication", "..\..\utility-netmq-protocol\src\protocol\client-slave-message-communication\client-slave-message-communication.csproj", "{68C3A069-C5C4-4376-9537-04240FC44419}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "slave-control-api", "slave-control-api\slave-control-api.csproj", "{3649DD3E-3AF3-423D-8730-91A5EFA75924}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +37,6 @@ Global
 		{CBB345E3-F18C-42DF-9501-475461D0ABF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBB345E3-F18C-42DF-9501-475461D0ABF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBB345E3-F18C-42DF-9501-475461D0ABF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36F636AE-ADCE-4D39-AE82-1A7B7BEBFA4F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3741344E-A280-4811-B44D-5766BCB62E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3741344E-A280-4811-B44D-5766BCB62E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3741344E-A280-4811-B44D-5766BCB62E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -67,6 +63,10 @@ Global
 		{68C3A069-C5C4-4376-9537-04240FC44419}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68C3A069-C5C4-4376-9537-04240FC44419}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68C3A069-C5C4-4376-9537-04240FC44419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3649DD3E-3AF3-423D-8730-91A5EFA75924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3649DD3E-3AF3-423D-8730-91A5EFA75924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3649DD3E-3AF3-423D-8730-91A5EFA75924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3649DD3E-3AF3-423D-8730-91A5EFA75924}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

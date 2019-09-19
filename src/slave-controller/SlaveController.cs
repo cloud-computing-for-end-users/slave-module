@@ -5,7 +5,7 @@ using client_slave_message_communication.model.mouse_action;
 using custom_message_based_implementation.model;
 using message_based_communication.model;
 using message_based_communication.module;
-using mouse_control_api.ConnectionWrapper;
+using slave_control_api.ConnectionWrapper;
 using System;
 using System.Threading;
 

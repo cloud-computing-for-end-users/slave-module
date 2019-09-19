@@ -1,4 +1,4 @@
-﻿using mouse_control_api.ConnectionWrapper;
+﻿using slave_control_api.ConnectionWrapper;
 using System;
 using System.Collections.Generic;
 using System.Text;

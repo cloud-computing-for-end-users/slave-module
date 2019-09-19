@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace mouse_control_api.ConnectionWrapper
+namespace slave_control_api.ConnectionWrapper
 {
     public class PythonAutoGUIWrapper
     {

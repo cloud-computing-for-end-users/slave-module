@@ -1,4 +1,5 @@
 ﻿using client_slave_message_communication.model.mouse_action;
+using slave_control_api.controlers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,7 @@ namespace slave_controller
 {
     public class MouseActionHandler
     {
-        private slave_control_api.controlers.MouseControlApi mouseControlApi;
+        private MouseControlApi mouseControlApi;
 
         public MouseActionHandler(slave_control_api.controlers.MouseControlApi mouseControlApi)
         {

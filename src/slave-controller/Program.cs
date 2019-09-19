@@ -1,6 +1,5 @@
 ﻿using custom_message_based_implementation.consts;
 using message_based_communication.model;
-using mouse_control_api.ConnectionWrapper;
 using System;
 
 namespace slave_controller

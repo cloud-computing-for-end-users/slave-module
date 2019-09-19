@@ -3,14 +3,10 @@ using client_slave_message_communication.interfaces;
 using client_slave_message_communication.model.keyboard_action;
 using client_slave_message_communication.model.mouse_action;
 using custom_message_based_implementation.model;
-using message_based_communication.encoding;
 using message_based_communication.model;
 using message_based_communication.module;
-using mouse_control_api;
 using mouse_control_api.ConnectionWrapper;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 namespace slave_controller

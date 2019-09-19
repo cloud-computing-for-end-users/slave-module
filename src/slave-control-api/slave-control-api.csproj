@@ -2,23 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>mouse_control_api</RootNamespace>
-    <ApplicationIcon />
-    <StartupObject />
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>slave_control_api</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PyAutoGui" Version="0.9.47" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="client-slave-message-communication">
-      <HintPath>..\..\..\utility-netmq-protocol\src\protocol\client-slave-message-communication\bin\Debug\netcoreapp2.2\client-slave-message-communication.dll</HintPath>
-    </Reference>
-    <Reference Include="message-based-communication">
-      <HintPath>..\..\..\utility-netmq-protocol\src\protocol\message-based-communication\bin\Debug\netcoreapp2.2\message-based-communication.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\..\utility-netmq-protocol\src\protocol\client-slave-message-communication\client-slave-message-communication.csproj" />
+    <ProjectReference Include="..\..\..\utility-netmq-protocol\src\protocol\message-based-communication\message-based-communication.csproj" />
   </ItemGroup>
 
 </Project>

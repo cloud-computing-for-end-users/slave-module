@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Text;
 using System.Threading;
 
 namespace slave_controller
@@ -12,20 +9,16 @@ namespace slave_controller
     /// </summary>
     public class PythonStarter
     {
-        private const string PATH_TO_PYTHON_EXE = @"C:\Users\MSI\PycharmProjects\untitled\venv\Scripts\python.exe";
+        private const string PATH_TO_PYTHON_EXE = "python";
 
-        private const string PATH_TO_PYTHON_MOUSE_CONTROL_API = @"C:\sourcetree\slave-module\src\py-auto-gui-socket-wrapper\PyAutoGuiSocketWrapper.py";
+        private static readonly string PATH_TO_PYTHON_MOUSE_CONTROL_API = AppContext.BaseDirectory + @"..\..\..\..\py-auto-gui-socket-wrapper\PyAutoGuiSocketWrapper.py";
         private const string ARGS_FOR_PYTHON_MOUSE_CONTROL_API = "";
-
-
+        
         private const string PATH_TO_PYTHON_KEYBOARD_CONTROL_API = "";
         private const string ARGS_FOR_PYTHON_KEYBOARD_CONTROL_API = "";
 
-
-        private const string PATH_TO_PYTHON_SCREEN_CAPTURE = @"C:\sourcetree\slave-module\src\pythonScreenCapture\ScreenCapturing.py";
+        private static readonly string PATH_TO_PYTHON_SCREEN_CAPTURE = AppContext.BaseDirectory + @"..\..\..\..\pythonScreenCapture\ScreenCapturing.py";
         private const string ARGS_FOR_PYTHON_SCREEN_CAPTURE = "";
-
-
 
         public static void StartPythonMouseControlApi()
         {

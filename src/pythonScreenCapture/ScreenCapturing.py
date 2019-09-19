@@ -1,10 +1,10 @@
 
 import sys
+import os
 # used to point to the location of the PyAutoGui library
-sys.path.append('.\\pyAutoGui\\')
+sys.path.append(os.path.abspath(os.path.dirname(sys.argv[0])) + '\\..\\pyAutoGui')
 import pyautogui
 import socket
-
 import threading
 import queue
 import socket
@@ -25,12 +25,14 @@ s.bind(('', 30303))
 print('Ready to accept a connection')
 
 def threadCaptureScreen():
+    if not os.path.exists('img'):
+        os.makedirs('img')
     print("Capture screen thread started")
     while(True):
         for i in range(100):
-            fileName = str(i) + ".jpg"
+            fileName = "img/" + str(i) + ".jpg"
             pyautogui.screenshot( fileName )
-            pyautogui.screenshot()
+           # pyautogui.screenshot()
             ourQueue.put(fileName)
             print("added file name to queue: " + fileName)
 

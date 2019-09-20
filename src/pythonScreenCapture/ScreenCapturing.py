@@ -1,8 +1,6 @@
 
 import sys
 import os
-# used to point to the location of the PyAutoGui library
-sys.path.append(os.path.abspath(os.path.dirname(sys.argv[0])) + '\\..\\pyAutoGui')
 import pyautogui
 import socket
 import threading

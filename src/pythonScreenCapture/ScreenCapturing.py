@@ -37,28 +37,31 @@ def threadCaptureScreen():
 
 def threadSendToClient():
     print("Send to client thread started")
+    s.listen(10)  # socket now listening
     while(True):
-        s.listen(10) # socket now listening
-        conn,addr = s.accept()
-        while(True):
-            while(0 == ourQueue.qsize()):
-                time.sleep(0.01)
-                print("sleeping because there are no images in the queue")
-            while(ourQueue.qsize() > 2):
-                ourQueue.get()
-                print("dumping images because queue is too big")
-            fileName = ourQueue.get()
-            print("file name read from queue:" + fileName)
-            in_file = open(fileName, "rb")  # opening for [r]eading as [b]inary
-            data = in_file.read()  # if you only wanted to read 512 bytes, do .read(512)
-            in_file.close()
-            print("image size is: " + str(len(data)))
-            theImageSize = (len(data)).to_bytes(4, byteorder="little", signed=True)
-            print("image size in bytes: " + str(theImageSize))
-            conn.send(theImageSize)
-            sentData = conn.send(data)
-            print('The amount of the data that was sent: ' + str(sentData))
-            print("finished sending a file to the client")
+        try:
+            conn,addr = s.accept()
+            while(True):
+                while(0 == ourQueue.qsize()):
+                    time.sleep(0.01)
+                    print("sleeping because there are no images in the queue")
+                while(ourQueue.qsize() > 2):
+                    ourQueue.get()
+                    print("dumping images because queue is too big")
+                fileName = ourQueue.get()
+                print("file name read from queue:" + fileName)
+                in_file = open(fileName, "rb")  # opening for [r]eading as [b]inary
+                data = in_file.read()  # if you only wanted to read 512 bytes, do .read(512)
+                in_file.close()
+                print("image size is: " + str(len(data)))
+                theImageSize = (len(data)).to_bytes(4, byteorder="little", signed=True)
+                print("image size in bytes: " + str(theImageSize))
+                conn.send(theImageSize)
+                sentData = conn.send(data)
+                print('The amount of the data that was sent: ' + str(sentData))
+                print("finished sending a file to the client")
+        except Exception:
+            print(Exception)
 
 
 threading.Thread(target=threadCaptureScreen).start()

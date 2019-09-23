@@ -12,6 +12,8 @@ namespace slave_control_api.controlers
         {
             MoveMouse,
             ClickLeft,
+            LeftMouseDown,
+            LeftMouseUp,
             ClickRight,
             ClickDouble,
             ScrollDown,
@@ -25,6 +27,8 @@ namespace slave_control_api.controlers
         {
             apiCommandToActualCommand.Add(ApiComman.MoveMouse, "-mo");
             apiCommandToActualCommand.Add(ApiComman.ClickLeft, "-cl");
+            apiCommandToActualCommand.Add(ApiComman.LeftMouseDown, "-ld");
+            apiCommandToActualCommand.Add(ApiComman.LeftMouseUp, "-lu");
 
         }
 

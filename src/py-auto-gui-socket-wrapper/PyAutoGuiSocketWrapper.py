@@ -14,13 +14,15 @@ def HandleCommandCall(command):
     args = command.split()
     #print("full arg:", args)
     knownCommands = {
-        "-mo":1,
-        "-cl":2,
-        "-cr":3,
-        "-cd":4,
-        "-sd":5,
-        "-su":6,
-        "-lo":7
+        "-mo":1, # move mouse
+        "-cl":2, # click left mouse button
+        "-ld":3, # left mouse button down
+        "-lu":4, # left mouse button up
+        "-cr":5, # click right mouse button
+        "-cd":6, # click double?
+        "-sd":7, # scroll down
+        "-su":8, # scroll up
+        "-lo":9  # location of mouse
     }
 
     command = knownCommands[args[0]]
@@ -41,6 +43,14 @@ def HandleCommandCall(command):
     elif (knownCommands["-cl"] == command):
         #left click
         pyautogui.leftClick()
+        return 0
+    elif (knownCommands["-ld"] == command):
+        #left mouse down
+        pyautogui.mouseDown()
+        return 0;
+    elif (knownCommands["-lu"] == command):
+        #left mouse up
+        pyautogui.mouseUp()
         return 0
     elif (knownCommands["-cr"] == command ):
         #click right mouse button

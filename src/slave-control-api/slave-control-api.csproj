@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\utility-netmq-protocol\src\protocol\client-slave-message-communication\client-slave-message-communication.csproj" />
     <ProjectReference Include="..\..\..\utility-netmq-protocol\src\protocol\message-based-communication\message-based-communication.csproj" />
+    <ProjectReference Include="..\WindowUtility\window-utility.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,6 +8,7 @@ using message_based_communication.module;
 using slave_control_api.ConnectionWrapper;
 using System;
 using System.Threading;
+using window_utility;
 
 namespace slave_controller
 {
@@ -19,6 +20,11 @@ namespace slave_controller
         //protected slave_control_api.controlers.MouseControlApi mouseController;
         //protected slave_control_api.controlers.KeyboardController keyboardController;
         protected MouseActionHandler mouseActionHandler;
+
+
+        private static readonly string APP_NAME = "Unavngivet - Paint";
+        //private static readonly string APP_NAME = "Paint";
+        private IntPtr appWindow;
 
 
         public SlaveController(Port forMouseControlApi, Port portForRegistrationToRouter, ModuleType moduleType, message_based_communication.encoding.Encoding customEncoding) : base(portForRegistrationToRouter, moduleType, customEncoding)
@@ -36,6 +42,11 @@ namespace slave_controller
             //mouse and keyboard controller
             //other nessesary helper objects
 
+            //do the setup with the application before capturing images
+            appWindow = WindowUtils.GetWindowByWindowTitle(APP_NAME);
+            WindowUtils.PutWindowOnTop(appWindow);
+
+
             PythonStarter.StartPythonScreenCapture();
 
         }
@@ -51,7 +62,7 @@ namespace slave_controller
 
         public void DoMouseAction(BaseMouseAction action)
         {
-            mouseActionHandler.HandleMouseAction(action);
+            mouseActionHandler.HandleMouseAction(action,appWindow);
         }
 
         public Port GetImageProducerConnInfo()
@@ -63,7 +74,11 @@ namespace slave_controller
         public override void HandleRequest(BaseRequest message)
         {
             object payload = null;
-            if (message.GetType().IsGenericType)
+            if (message is Handshake _handshake)
+            {
+                payload = Handshake(_handshake.arg1PrimaryKey);
+            }
+            else if (message.GetType().IsGenericType)
             {
                 var type = message.GetType().GetGenericTypeDefinition();
                 var gType = typeof(DoMouseAction<BaseMouseAction>).GetGenericTypeDefinition();
@@ -88,9 +103,10 @@ namespace slave_controller
             SendResponse(response);
         }
 
-        public void Handshake(PrimaryKey pk)
+
+        public Tuple<int,int> Handshake(PrimaryKey pk)
         {
-            throw new NotImplementedException();
+            return WindowUtils.GetApplicationSize(appWindow);
         }
     }
 }

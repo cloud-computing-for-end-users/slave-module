@@ -16,22 +16,32 @@ namespace slave_controller
         }
 
 
-        public void HandleMouseAction(BaseMouseAction mouseAction)
+        public void HandleMouseAction(BaseMouseAction mouseAction, IntPtr windowHandle)
         {
             var Type = mouseAction.GetType();
             if(BaseMouseAction.MouseAction.ClickLeft == mouseAction.Action
                 && mouseAction is ClickLeftAction _clickLeft)
             {
-                this.mouseControlApi.ClickLeft(_clickLeft.arg1ScreenLocation);
+                this.mouseControlApi.ClickLeft();
             }
             else if(BaseMouseAction.MouseAction.MouseMove == mouseAction.Action
                 && mouseAction is MouseMoveAction _mouseMove)
             {
-                this.mouseControlApi.MoveMouse(_mouseMove.arg1RelativeScreenLocation);
+                this.mouseControlApi.MoveMouse(_mouseMove.arg1RelativeScreenLocation, windowHandle);
+            }
+            else if(BaseMouseAction.MouseAction.LeftDown == mouseAction.Action
+                && mouseAction is LeftMouseDownAction _leftDown)
+            {
+                this.mouseControlApi.LeftDown();
+            }
+            else if (BaseMouseAction.MouseAction.LeftUp == mouseAction.Action
+                && mouseAction is LeftMouseUpAction _leftUp)
+            {
+                this.mouseControlApi.LeftUp();
             }
             else
             {
-                throw new NotImplementedException();
+                throw new NotImplementedException("Not implemented in the ");
             }
         }
     }

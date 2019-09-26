@@ -3,6 +3,7 @@ using slave_control_api.ConnectionWrapper;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using window_utility;
 
 namespace slave_control_api.controlers
 {
@@ -32,8 +33,6 @@ namespace slave_control_api.controlers
 
         }
 
-
-
         private PythonAutoGUIWrapper pyAutoGui;
 
         public MouseControlApi(PythonAutoGUIWrapper pyAutoGui)
@@ -46,21 +45,39 @@ namespace slave_control_api.controlers
 
 
 
-        public int MoveMouse(RelativeScreenLocation screenLocation)
+        public int MoveMouse(RelativeScreenLocation screenLocation, IntPtr windowHandle)
         {
+            var winPosition = WindowUtils.GetWindowPosition(windowHandle);
+            
 
-            var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
-            var arg2 = screenLocation.FromTop.ThePercentage.ToString();
+            var arg1 = Convert.ToInt32(winPosition.Left + screenLocation.FromLeft.ThePercentage/100 * winPosition.Width);
+            var arg2 = Convert.ToInt32(winPosition.Top + screenLocation.FromTop.ThePercentage/100 * winPosition.Height);
 
-            return RunCommand(ApiComman.MoveMouse, arg1, arg2);
+            return RunCommand(ApiComman.MoveMouse, arg1.ToString(), arg2.ToString()) ;
         }
 
-        public int ClickLeft(RelativeScreenLocation screenLocation)
+        public int ClickLeft()
         {
-            var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
-            var arg2 = screenLocation.FromTop.ThePercentage.ToString();
+            //var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
+            //var arg2 = screenLocation.FromTop.ThePercentage.ToString();
 
-            return RunCommand(ApiComman.ClickLeft, arg1,arg2);
+            return RunCommand(ApiComman.ClickLeft/*, arg1,arg2*/);
+        }
+
+        public int LeftDown()
+        {
+            //var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
+            //var arg2 = screenLocation.FromTop.ThePercentage.ToString();
+
+            return RunCommand(ApiComman.LeftMouseDown/*, arg1,arg2*/);
+        }
+
+        public int LeftUp()
+        {
+            //var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
+            //var arg2 = screenLocation.FromTop.ThePercentage.ToString();
+
+            return RunCommand(ApiComman.LeftMouseUp/*, arg1,arg2*/);
         }
 
         private int RunCommand(MouseControlApi.ApiComman command, params string [] args)

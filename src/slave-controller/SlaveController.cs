@@ -22,8 +22,7 @@ namespace slave_controller
         protected MouseActionHandler mouseActionHandler;
 
 
-        private static readonly string APP_NAME = "Unavngivet - Paint";
-        //private static readonly string APP_NAME = "Paint";
+        private static readonly string APP_NAME = "MSPAINTAPP";
         private IntPtr appWindow;
 
 
@@ -42,8 +41,16 @@ namespace slave_controller
             //mouse and keyboard controller
             //other nessesary helper objects
 
+            // FIRST USE THE GetWindowByWindowTitle and GetClassName - when you know the class name, switch to GetWindowByClass
             //do the setup with the application before capturing images
-            appWindow = WindowUtils.GetWindowByWindowTitle(APP_NAME);
+            //appWindow = WindowUtils.GetWindowByWindowTitle(APP_NAME);
+
+            // used to get 
+            //Console.WriteLine("Class name: " + WindowUtils.GetClassName(appWindow));
+
+            // AFTER YOU KNOW CLASS NAME OF A WINDOW, USE THIS
+            appWindow = WindowUtils.GetWindowByClass(APP_NAME);
+
             WindowUtils.PutWindowOnTop(appWindow);
 
 

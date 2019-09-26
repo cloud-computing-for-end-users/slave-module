@@ -16,7 +16,7 @@ namespace slave_controller
             {
                 try
                 {
-                    Console.WriteLine("Starting the slave controller");
+                    Console.WriteLine("Slave Controller is starting...");
                     
                     var slaveCommInfo = new ConnectionInformation()
                     {
@@ -24,13 +24,10 @@ namespace slave_controller
                         Port = new Port() { ThePort = 10142 }
                     };
 
-
-
                     var slaveController = new SlaveController(new Port() { ThePort = 60606 }, new Port() { ThePort = 10143 }, new ModuleType() { TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE }, new client_slave_message_communication.encoding.CustomEncoding());
                     slaveController.Setup(slaveCommInfo, new Port() { ThePort = 10143 }, slaveCommInfo, new client_slave_message_communication.encoding.CustomEncoding());
 
-                    Console.WriteLine("The slave controller started without experiencing any exceptions");
-
+                    Console.WriteLine("Slave Controller has started successfully with IP: " + slaveCommInfo.IP.TheIP);
 
                     if (IsTesting)
                     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Text;
 
 namespace window_utility
 {
@@ -51,14 +52,23 @@ namespace window_utility
             return new Tuple<int, int>(screenWidth, screenHeight);
         }
 
+        public static string GetClassName(IntPtr window)
+        {
+            // Pre-allocate 256 characters, since this is the maximum class name length.
+            var className = new StringBuilder(256);
+            //Get the window class name
+            var nRet = ExternDLLUtilities.GetClassName(window, className, className.Capacity);
+            return nRet != 0 ? className.ToString() : "No Class Name";
+        }
+
         private static float GetScalingFactor()
         {
             Graphics g = Graphics.FromHwnd(IntPtr.Zero);
             IntPtr desktop = g.GetHdc();
-            int LogicalScreenHeight = ExternDLLUtilities.GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
-            int PhysicalScreenHeight = ExternDLLUtilities.GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
+            var logicalScreenHeight = ExternDLLUtilities.GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
+            var physicalScreenHeight = ExternDLLUtilities.GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
 
-            return (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
+            return physicalScreenHeight / (float)logicalScreenHeight;
         }
 
 

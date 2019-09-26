@@ -46,10 +46,11 @@ namespace window_utility
         /// <returns></returns>
         public static Tuple<int,int> GetApplicationSize(IntPtr window)
         {
-            int screenHeight = ExternDLLUtilities.GetDeviceCaps(window, (int)DeviceCap.VERTRES);
-            int screenWidth  = ExternDLLUtilities.GetDeviceCaps(window, (int)DeviceCap.HORZRES);
-
-            return new Tuple<int, int>(screenWidth, screenHeight);
+            var rect = new Rect();
+            ExternDLLUtilities.GetWindowRect(window, ref rect);
+            var windowPosition = new WindowPosition(rect, GetScalingFactor());
+            Console.WriteLine(windowPosition);
+            return new Tuple<int, int>(windowPosition.Width, windowPosition.Height);
         }
 
         public static string GetClassName(IntPtr window)

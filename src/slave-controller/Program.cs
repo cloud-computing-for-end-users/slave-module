@@ -3,6 +3,7 @@ using custom_message_based_implementation.consts;
 using message_based_communication.model;
 using System;
 using System.Threading;
+using custom_message_based_implementation.model;
 
 namespace slave_controller
 {
@@ -31,6 +32,8 @@ namespace slave_controller
 
                     if (IsTesting)
                     {
+                        slaveController.Handshake(new PrimaryKey());
+
                         Thread.Sleep(5000);
 
                         slaveController.DoMouseAction(new MouseMoveAction()

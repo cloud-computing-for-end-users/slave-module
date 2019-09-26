@@ -21,10 +21,8 @@ namespace slave_controller
         //protected slave_control_api.controlers.KeyboardController keyboardController;
         protected MouseActionHandler mouseActionHandler;
 
-
         private static readonly string APP_NAME = "MSPAINTAPP";
         private IntPtr appWindow;
-
 
         public SlaveController(Port forMouseControlApi, Port portForRegistrationToRouter, ModuleType moduleType, message_based_communication.encoding.Encoding customEncoding) : base(portForRegistrationToRouter, moduleType, customEncoding)
         {
@@ -42,10 +40,7 @@ namespace slave_controller
             //other nessesary helper objects
 
             // FIRST USE THE GetWindowByWindowTitle and GetClassName - when you know the class name, switch to GetWindowByClass
-            //do the setup with the application before capturing images
-            //appWindow = WindowUtils.GetWindowByWindowTitle(APP_NAME);
-
-            // used to get 
+            //appWindow = WindowUtils.GetWindowByWindowTitle("Untitled - Paint");
             //Console.WriteLine("Class name: " + WindowUtils.GetClassName(appWindow));
 
             // AFTER YOU KNOW CLASS NAME OF A WINDOW, USE THIS
@@ -53,14 +48,9 @@ namespace slave_controller
 
             WindowUtils.PutWindowOnTop(appWindow);
 
-
             PythonStarter.StartPythonScreenCapture();
 
         }
-
-
-
-
 
         public void DoKeyboardAction(BaseKeyboardAction action)
         {
@@ -109,7 +99,6 @@ namespace slave_controller
             var response = GenerateResponseBasedOnRequestAndPayload(message, payload);
             SendResponse(response);
         }
-
 
         public Tuple<int,int> Handshake(PrimaryKey pk)
         {

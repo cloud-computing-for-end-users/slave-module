@@ -14,6 +14,8 @@ namespace slave_controller
 {
     public class SlaveController : BaseRouterModule, ISlave
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         public override string CALL_ID_PREFIX => "SLAVE_CALL_ID_";
         protected override string MODULE_ID_PREFIXES => "SLAVE_GIVEN_MODULE_ID_";
 
@@ -40,12 +42,12 @@ namespace slave_controller
             //other nessesary helper objects
 
             // FIRST USE THE GetWindowByWindowTitle and GetClassName - when you know the class name, switch to GetWindowByClass
-            //appWindow = WindowUtils.GetWindowByWindowTitle("Untitled - Paint");
+            appWindow = WindowUtils.GetWindowByWindowTitle("Untitled - Paint");
             //Console.WriteLine("Class name: " + WindowUtils.GetClassName(appWindow));
 
             // AFTER YOU KNOW CLASS NAME OF A WINDOW, USE THIS
-            appWindow = WindowUtils.GetWindowByClass(APP_NAME);
-
+            //appWindow = WindowUtils.GetWindowByClass(APP_NAME);
+            
             WindowUtils.PutWindowOnTop(appWindow);
 
             PythonStarter.StartPythonScreenCapture();

@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "client-slave-message-commun
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "slave-control-api", "slave-control-api\slave-control-api.csproj", "{3649DD3E-3AF3-423D-8730-91A5EFA75924}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "window-utility", "WindowUtility\window-utility.csproj", "{9B685869-DF84-4D43-9D27-1C371CBC9F8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "window-utility", "WindowUtility\window-utility.csproj", "{9B685869-DF84-4D43-9D27-1C371CBC9F8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pinvoke-finding-windows-and-dimensions", "pinvoke-finding-windows-and-dimensions\pinvoke-finding-windows-and-dimensions.csproj", "{84A7D045-7500-4197-8680-FC5397B756B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{9B685869-DF84-4D43-9D27-1C371CBC9F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B685869-DF84-4D43-9D27-1C371CBC9F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B685869-DF84-4D43-9D27-1C371CBC9F8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84A7D045-7500-4197-8680-FC5397B756B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A7D045-7500-4197-8680-FC5397B756B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A7D045-7500-4197-8680-FC5397B756B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A7D045-7500-4197-8680-FC5397B756B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

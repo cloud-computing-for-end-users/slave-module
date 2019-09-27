@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.Text;
+using NLog;
 
 namespace window_utility
 {
     public class WindowUtils
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         public static IntPtr GetWindowByWindowTitle(string windowTitle)
         {
             var window = ExternDLLUtilities.FindWindow(null, windowTitle);
@@ -49,7 +52,7 @@ namespace window_utility
             var rect = new Rect();
             ExternDLLUtilities.GetWindowRect(window, ref rect);
             var windowPosition = new WindowPosition(rect, GetScalingFactor());
-            Console.WriteLine(windowPosition);
+            Logger.Info(windowPosition);
             return new Tuple<int, int>(windowPosition.Width, windowPosition.Height);
         }
 
@@ -71,7 +74,5 @@ namespace window_utility
 
             return physicalScreenHeight / (float)logicalScreenHeight;
         }
-
-
     }
 }

@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Drawing;
+using System.Text;
+using NLog;
 
 namespace window_utility
 {
     public class WindowUtils
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         public static IntPtr GetWindowByWindowTitle(string windowTitle)
         {
             var window = ExternDLLUtilities.FindWindow(null, windowTitle);
@@ -45,22 +49,30 @@ namespace window_utility
         /// <returns></returns>
         public static Tuple<int,int> GetApplicationSize(IntPtr window)
         {
-            int screenHeight = ExternDLLUtilities.GetDeviceCaps(window, (int)DeviceCap.VERTRES);
-            int screenWidth  = ExternDLLUtilities.GetDeviceCaps(window, (int)DeviceCap.HORZRES);
+            var rect = new Rect();
+            ExternDLLUtilities.GetWindowRect(window, ref rect);
+            var windowPosition = new WindowPosition(rect, GetScalingFactor());
+            Logger.Info(windowPosition);
+            return new Tuple<int, int>(windowPosition.Width, windowPosition.Height);
+        }
 
-            return new Tuple<int, int>(screenWidth, screenHeight);
+        public static string GetClassName(IntPtr window)
+        {
+            // Pre-allocate 256 characters, since this is the maximum class name length.
+            var className = new StringBuilder(256);
+            //Get the window class name
+            var nRet = ExternDLLUtilities.GetClassName(window, className, className.Capacity);
+            return nRet != 0 ? className.ToString() : "No Class Name";
         }
 
         private static float GetScalingFactor()
         {
             Graphics g = Graphics.FromHwnd(IntPtr.Zero);
             IntPtr desktop = g.GetHdc();
-            int LogicalScreenHeight = ExternDLLUtilities.GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
-            int PhysicalScreenHeight = ExternDLLUtilities.GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
+            var logicalScreenHeight = ExternDLLUtilities.GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
+            var physicalScreenHeight = ExternDLLUtilities.GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
 
-            return (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
+            return physicalScreenHeight / (float)logicalScreenHeight;
         }
-
-
     }
 }

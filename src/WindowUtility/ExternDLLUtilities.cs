@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace window_utility
 {
@@ -20,6 +21,9 @@ namespace window_utility
         [DllImport("user32.dll", EntryPoint = "GetWindowLongPtr")]
         internal static extern IntPtr GetWindowLongPtr(IntPtr hWnd, int nIndex);
 
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+
         // This static method is required because legacy OSes do not support SetWindowLongPtr 
         public static IntPtr SetWindowLongPtr(HandleRef hWnd, int nIndex, IntPtr dwNewLong)
         {
@@ -34,5 +38,6 @@ namespace window_utility
 
         [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr")]
         private static extern IntPtr SetWindowLongPtr64(HandleRef hWnd, int nIndex, IntPtr dwNewLong);
+
     }
 }

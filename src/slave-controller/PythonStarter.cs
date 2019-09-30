@@ -11,7 +11,7 @@ namespace slave_controller
     {
         private const string PATH_TO_PYTHON_EXE = "python";
 
-        private static readonly string PATH_TO_PYTHON_MOUSE_CONTROL_API = AppContext.BaseDirectory + @"..\..\..\..\py-auto-gui-socket-wrapper\PyAutoGuiSocketWrapper.py";
+        private static readonly string PATH_TO_PYTHON_MOUSE_CONTROL_API = AppContext.BaseDirectory + @"..\..\..\..\py-auto-gui-socket-wrapper\PyAutoGuiMouseController.py";
         private const string ARGS_FOR_PYTHON_MOUSE_CONTROL_API = "";
         
         private const string PATH_TO_PYTHON_KEYBOARD_CONTROL_API = "";

@@ -27,7 +27,10 @@ namespace slave_controller
             else if(BaseMouseAction.MouseAction.MouseMove == mouseAction.Action
                 && mouseAction is MouseMoveAction _mouseMove)
             {
-                this.mouseControlApi.MoveMouse(_mouseMove.relativeScreenLocation, windowHandle);
+                if(_mouseMove.relativeScreenLocation != null)
+                {
+                    this.mouseControlApi.MoveMouse(_mouseMove.relativeScreenLocation, windowHandle);
+                }
             }
             else if(BaseMouseAction.MouseAction.LeftDown == mouseAction.Action
                 && mouseAction is LeftMouseDownAction _leftDown)

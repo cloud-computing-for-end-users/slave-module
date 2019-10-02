@@ -7,6 +7,8 @@ using message_based_communication.model;
 using message_based_communication.module;
 using slave_control_api.ConnectionWrapper;
 using System;
+using System.Drawing.Printing;
+using System.Text.RegularExpressions;
 using System.Threading;
 using window_utility;
 
@@ -42,13 +44,17 @@ namespace slave_controller
             //other nessesary helper objects
 
             // FIRST USE THE GetWindowByWindowTitle and GetClassName - when you know the class name, switch to GetWindowByClass
-            appWindow = WindowUtils.GetWindowByWindowTitle("Untitled - Paint");
+            appWindow = WindowUtils.GetWindowHandle(windowTitleText : new Regex("Paint"));
+            //appWindow = WindowUtils.GetWindowByWindowTitle("Unavngivet - Paint");
             //Console.WriteLine("Class name: " + WindowUtils.GetClassName(appWindow));
 
             // AFTER YOU KNOW CLASS NAME OF A WINDOW, USE THIS
             //appWindow = WindowUtils.GetWindowByClass(APP_NAME);
-            
+
             WindowUtils.PutWindowOnTop(appWindow);
+
+            var applicationDimensions = WindowUtils.GetApplicationSize(appWindow);
+            Console.WriteLine("Application dimensions: " + applicationDimensions.ToString());
 
             PythonStarter.StartPythonScreenCapture();
 

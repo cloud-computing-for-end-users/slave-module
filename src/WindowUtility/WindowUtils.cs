@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Text;
+using System.Text.RegularExpressions;
 using NLog;
 
 namespace window_utility
@@ -9,23 +10,28 @@ namespace window_utility
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public static IntPtr GetWindowByWindowTitle(string windowTitle)
+        //public static IntPtr GetWindowByWindowTitle(string windowTitle)
+        //{
+        //    var window = ExternDLLUtilities.FindWindow(null, windowTitle);
+        //    if (window != IntPtr.Zero)
+        //    {
+        //        return window;
+        //    }
+        //    throw new ArgumentException("No window for " + windowTitle + " exists.");
+        //}
+        //public static IntPtr GetWindowByClass(string className) //e.g. notepad
+        //{
+        //    var window = ExternDLLUtilities.FindWindow(className, null);
+        //    if (window != IntPtr.Zero)
+        //    {
+        //        return window;
+        //    }
+        //    throw new ArgumentException("No window for " + className + " exists.");
+        //}
+
+        public static IntPtr GetWindowHandle(Regex windowTitleText = null, Regex className = null, Regex process = null)
         {
-            var window = ExternDLLUtilities.FindWindow(null, windowTitle);
-            if (window != IntPtr.Zero)
-            {
-                return window;
-            }
-            throw new ArgumentException("No window for " + windowTitle + " exists.");
-        }
-        public static IntPtr GetWindowByClass(string className) //e.g. notepad
-        {
-            var window = ExternDLLUtilities.FindWindow(className, null);
-            if (window != IntPtr.Zero)
-            {
-                return window;
-            }
-            throw new ArgumentException("No window for " + className + " exists.");
+            return FindWindow.GetWindowHandle(windowTitleText, className, process);
         }
 
         public static WindowPosition GetWindowPosition(IntPtr window)

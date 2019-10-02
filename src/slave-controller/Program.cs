@@ -43,7 +43,7 @@ namespace slave_controller
 
                         slaveController.DoMouseAction(new MouseMoveAction()
                         {
-                            relativeScreenLocation = new client_slave_message_communication.model.RelativeScreenLocation()
+                            arg1RelativeScreenLocation = new client_slave_message_communication.model.RelativeScreenLocation()
                             {
                                 FromLeft = new client_slave_message_communication.model.Percent()
                                 {
@@ -63,7 +63,7 @@ namespace slave_controller
 
                         slaveController.DoMouseAction(new MouseMoveAction()
                         {
-                            relativeScreenLocation = new client_slave_message_communication.model.RelativeScreenLocation()
+                            arg1RelativeScreenLocation = new client_slave_message_communication.model.RelativeScreenLocation()
                             {
                                 FromLeft = new client_slave_message_communication.model.Percent()
                                 {

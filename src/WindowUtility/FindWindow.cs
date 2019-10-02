@@ -1,14 +1,18 @@
-﻿using System.Runtime.InteropServices;
-using System.Drawing;
-using System.Text.RegularExpressions;
-using System;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 
-namespace Getting_window_location_and_size
+namespace window_utility
 {
-    class Program
+    class FindWindow
     {
+        private static bool PRINT = false;
+
         // Win32 constants.
         const int WM_GETTEXT = 0x000D;
         const int WM_GETTEXTLENGTH = 0x000E;
@@ -29,19 +33,86 @@ namespace Getting_window_location_and_size
         [DllImport("user32.dll")]
         public static extern long GetWindowRect(int hWnd, ref Rectangle lpRect);
 
+
+
+
+
+        private static Tuple<int, int> _widthHeight = null;
+        /// <summary>
+        /// returns application width as item 1, returns application height as item 2
+        /// This method uses polling to make the call synchronous
+        /// </summary>
+        /// <returns></returns>
+        public static Tuple<int, int> GetApplicationWidthAndHeight(string textInWindowTitle)
+        {
+            _widthHeight = null;
+            WindowFinder wf = new WindowFinder();
+            wf.FindWindows(0, null, new Regex(textInWindowTitle), null, FoundWindow);
+
+            int waitTimePerCycle = 100;
+            int millSecondInFiveSeconds = 5 * 1000;
+            for (int i = 0; i < millSecondInFiveSeconds / waitTimePerCycle; i++)
+            {
+                if (null == _widthHeight)
+                {
+                    Thread.Sleep(100);
+                }
+                else
+                {
+                    return _widthHeight;
+                }
+            }
+            throw new TimeoutException("Timed out in GetApplicationWidthAndHeight");
+        }
+
+        private static IntPtr _windowHandle = IntPtr.Zero;
+        /// <summary>
+        /// this application uses polling to serialise the call to this method
+        /// </summary>
+        /// <param name="windowTitleText"></param>
+        /// <param name="className"></param>
+        /// <returns></returns>
+        public static IntPtr GetWindowHandle(Regex windowTitleText = null, Regex className = null, Regex process = null)
+        {
+            _windowHandle = IntPtr.Zero;
+            var finder = new WindowFinder();
+            finder.FindWindows(0, className, windowTitleText, process, FoundWindow);
+
+            int waitTimePerCycle = 100;
+            int millSecondInFiveSeconds = 5 * 1000;
+            //varriable polling
+            for (int i = 0; i < millSecondInFiveSeconds / waitTimePerCycle; i++)
+            {
+                if (IntPtr.Zero == _windowHandle)
+                {
+                    Thread.Sleep(100);
+                }
+                else
+                {
+                    var result = _windowHandle;
+                    _windowHandle = IntPtr.Zero;
+                    return result;
+                }
+            }
+            throw new Exception("Window not found exception");
+        }
+
+
         static void Main(string[] args)
         {
             // Introduced in the "Finding specific windows" blog, we use the WindowFinder class to find all Internet Explorer main window instances.
             WindowFinder wf = new WindowFinder();
 
             // Find all visual studio instances
-            wf.FindWindows(0, null, new Regex("Paint"), null, FoundWindow);
+            var appDimensions = GetApplicationWidthAndHeight("Paint");
+            Console.WriteLine("Width: " + appDimensions.Item1 + ", Height: " + appDimensions.Item2);
 
             Console.Read();
         }
 
         static bool FoundWindow(int handle)
         {
+            _windowHandle = new IntPtr(handle);
             // First we intialize an empty Rectangle object.
             Rectangle rect = new Rectangle();
 
@@ -62,7 +133,7 @@ namespace Getting_window_location_and_size
             // After this we have the real window properties through the X, Y, Width and Height values.
             rect.Width = rect.Width - rect.X;
             rect.Height = rect.Height - rect.Y;
-
+            _widthHeight = new Tuple<int, int>(rect.Width, rect.Height);
             // Lets print the rectangle after we've fixed it so we can confirm it's correct.
             Console.WriteLine(rect.ToString());
 
@@ -72,9 +143,14 @@ namespace Getting_window_location_and_size
             return true;
         }
 
-        // Prints basic properties of a window, uses function already used in previous blogs.
+        //Prints basic properties of a window, uses function already used in previous blogs.
         private static void PrintWindowInfo(int handle)
         {
+            if (false == PRINT)
+            {
+                return;
+            }
+
             // Get the class.
             StringBuilder sbClass = new StringBuilder(256);
             GetClassName(handle, sbClass, sbClass.Capacity);
@@ -95,7 +171,7 @@ namespace Getting_window_location_and_size
     /// <summary>
     /// A class used for finding windows based upon their class, title, process and parent window handle.
     /// </summary>
-    public class WindowFinder
+    internal class WindowFinder
     {
         // Win32 constants.
         const int WM_GETTEXT = 0x000D;

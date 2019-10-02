@@ -47,8 +47,9 @@ namespace slave_control_api.controlers
 
         public int MoveMouse(RelativeScreenLocation screenLocation, IntPtr windowHandle)
         {
+            // todo fix
             var winPosition = WindowUtils.GetWindowPosition(windowHandle);
-            
+            var winPosition2 = WindowUtils.GetApplicationSize2(windowHandle);
 
             var arg1 = Convert.ToInt32(winPosition.Left + screenLocation.FromLeft.ThePercentage/100 * winPosition.Width);
             var arg2 = Convert.ToInt32(winPosition.Top + screenLocation.FromTop.ThePercentage/100 * winPosition.Height);

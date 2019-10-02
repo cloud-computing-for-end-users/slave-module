@@ -43,12 +43,12 @@ namespace window_utility
         /// This method uses polling to make the call synchronous
         /// </summary>
         /// <returns></returns>
-        public static Tuple<int, int> GetApplicationWidthAndHeight(string textInWindowTitle)
+        public static Tuple<int, int> GetApplicationWidthAndHeight(IntPtr handle)
         {
             _widthHeight = null;
             WindowFinder wf = new WindowFinder();
-            wf.FindWindows(0, null, new Regex(textInWindowTitle), null, FoundWindow);
-
+            FoundWindow((int)handle);
+            
             int waitTimePerCycle = 100;
             int millSecondInFiveSeconds = 5 * 1000;
             for (int i = 0; i < millSecondInFiveSeconds / waitTimePerCycle; i++)
@@ -104,8 +104,8 @@ namespace window_utility
             WindowFinder wf = new WindowFinder();
 
             // Find all visual studio instances
-            var appDimensions = GetApplicationWidthAndHeight("Paint");
-            Console.WriteLine("Width: " + appDimensions.Item1 + ", Height: " + appDimensions.Item2);
+            //var appDimensions = GetApplicationWidthAndHeight("Paint");
+            //Console.WriteLine("Width: " + appDimensions.Item1 + ", Height: " + appDimensions.Item2);
 
             Console.Read();
         }

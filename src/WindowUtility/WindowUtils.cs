@@ -62,6 +62,12 @@ namespace window_utility
             return new Tuple<int, int>(windowPosition.Width, windowPosition.Height);
         }
 
+        public static Tuple<int, int> GetApplicationSize2(IntPtr window)
+        {
+            // todo rename method
+            return FindWindow.GetApplicationWidthAndHeight(window);
+        }
+
         public static string GetClassName(IntPtr window)
         {
             // Pre-allocate 256 characters, since this is the maximum class name length.

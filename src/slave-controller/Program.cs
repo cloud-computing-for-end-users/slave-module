@@ -12,7 +12,7 @@ namespace slave_controller
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        private const bool IsTesting = false;
+        private static bool IsTesting = false;
         private const bool IsLocalhost = true;
         static void Main(string[] args)
         {
@@ -43,7 +43,7 @@ namespace slave_controller
 
                         slaveController.DoMouseAction(new MouseMoveAction()
                         {
-                            arg1RelativeScreenLocation = new client_slave_message_communication.model.RelativeScreenLocation()
+                            RelativeScreenLocation = new client_slave_message_communication.model.RelativeScreenLocation()
                             {
                                 FromLeft = new client_slave_message_communication.model.Percent()
                                 {
@@ -63,8 +63,9 @@ namespace slave_controller
 
                         slaveController.DoMouseAction(new MouseMoveAction()
                         {
-                            arg1RelativeScreenLocation = new client_slave_message_communication.model.RelativeScreenLocation()
+                            RelativeScreenLocation = new client_slave_message_communication.model.RelativeScreenLocation()
                             {
+                                
                                 FromLeft = new client_slave_message_communication.model.Percent()
                                 {
                                     ThePercentage = 50

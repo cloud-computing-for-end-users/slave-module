@@ -3,6 +3,8 @@ using slave_control_api.ConnectionWrapper;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using client_slave_message_communication.model.mouse_action;
 using window_utility;
 
 namespace slave_control_api.controlers
@@ -24,6 +26,8 @@ namespace slave_control_api.controlers
 
         protected static Dictionary<ApiComman, string> apiCommandToActualCommand = new Dictionary<ApiComman, string>();
 
+
+
         static MouseControlApi()
         {
             apiCommandToActualCommand.Add(ApiComman.MoveMouse, "-mo");
@@ -38,6 +42,7 @@ namespace slave_control_api.controlers
         public MouseControlApi(PythonAutoGUIWrapper pyAutoGui)
         {
             this.pyAutoGui = pyAutoGui;
+
         }
 
 
@@ -45,7 +50,7 @@ namespace slave_control_api.controlers
 
 
 
-        public int MoveMouse(RelativeScreenLocation screenLocation, IntPtr windowHandle)
+        public  int MoveMouse(RelativeScreenLocation screenLocation, IntPtr windowHandle)
         {
             // todo fix
             var winPosition = WindowUtils.GetWindowPosition(windowHandle);
@@ -57,7 +62,7 @@ namespace slave_control_api.controlers
             return RunCommand(ApiComman.MoveMouse, arg1.ToString(), arg2.ToString()) ;
         }
 
-        public int ClickLeft()
+        public  int ClickLeft()
         {
             //var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
             //var arg2 = screenLocation.FromTop.ThePercentage.ToString();
@@ -81,7 +86,7 @@ namespace slave_control_api.controlers
             return RunCommand(ApiComman.LeftMouseUp/*, arg1,arg2*/);
         }
 
-        private int RunCommand(MouseControlApi.ApiComman command, params string [] args)
+        protected int RunCommand(MouseControlApi.ApiComman command, params string [] args)
         {
             var result = this.pyAutoGui?.executeApiCommand(apiCommandToActualCommand[command], new List<string>(args));
             return -1; //TODO consider fixing

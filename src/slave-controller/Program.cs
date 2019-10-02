@@ -13,7 +13,7 @@ namespace slave_controller
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         private static bool IsTesting = false;
-        private const bool IsLocalhost = true;
+        private const bool IsLocalhost = false;
         static void Main(string[] args)
         {
             SetupNLog();
@@ -26,7 +26,7 @@ namespace slave_controller
                     
                     var slaveCommInfo = new ConnectionInformation()
                     {
-                        IP = new IP() { TheIP = IsLocalhost ? "127.0.0.1" : "10.152.212.21" },
+                        IP = new IP() { TheIP = IsLocalhost ? "127.0.0.1" : "10.152.212.16" },
                         Port = new Port() { ThePort = 10142 }
                     };
 

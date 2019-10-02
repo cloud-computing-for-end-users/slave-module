@@ -36,7 +36,6 @@ namespace slave_controller
 
             var pyAutoGui = new PythonAutoGUIWrapper(forMouseControlApi);//TODO FIX, not sure what I mean here anymore
 
-            this.mouseActionHandler = new MouseActionHandler(new slave_control_api.controlers.MouseControlApi(pyAutoGui));
             //this.keyboardController = new slave_control_api.controlers.KeyboardController(pyAutoGuiWrapper);
 
             //create instances of image capture
@@ -45,6 +44,8 @@ namespace slave_controller
 
             // FIRST USE THE GetWindowByWindowTitle and GetClassName - when you know the class name, switch to GetWindowByClass
             appWindow = WindowUtils.GetWindowHandle(windowTitleText : new Regex("Paint"));
+            this.mouseActionHandler = new MouseActionHandler(new slave_control_api.controlers.MouseControlApi(pyAutoGui), appWindow);
+
             //appWindow = WindowUtils.GetWindowByWindowTitle("Unavngivet - Paint");
             //Console.WriteLine("Class name: " + WindowUtils.GetClassName(appWindow));
 
@@ -67,7 +68,7 @@ namespace slave_controller
 
         public void DoMouseAction(BaseMouseAction action)
         {
-            mouseActionHandler.HandleMouseAction(action,appWindow);
+            mouseActionHandler.QueueMouseCommand(action);
         }
 
         public Port GetImageProducerConnInfo()

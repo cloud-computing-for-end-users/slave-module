@@ -45,48 +45,45 @@ namespace slave_control_api.controlers
 
         }
 
+        private static Dictionary<ApiComman, string> ApiCommandStringParam = new Dictionary<ApiComman, string>();
 
-        //private static Dictionary<ApiComman, string> ApiCommandStringParam = new Dictionary<ApiComman, string>();
-
-
-
-        public  int MoveMouse(RelativeScreenLocation screenLocation, IntPtr windowHandle)
+        public int MoveMouse(RelativeScreenLocation screenLocation, IntPtr windowHandle)
         {
             // todo fix
             var winPosition = WindowUtils.GetWindowPosition(windowHandle);
             var winPosition2 = WindowUtils.GetApplicationSize2(windowHandle);
 
-            var arg1 = Convert.ToInt32(winPosition.Left + screenLocation.FromLeft.ThePercentage/100 * winPosition.Width);
-            var arg2 = Convert.ToInt32(winPosition.Top + screenLocation.FromTop.ThePercentage/100 * winPosition.Height);
+            var arg1 = Convert.ToInt32(winPosition.Left + screenLocation.FromLeft.ThePercentage / 100 * winPosition.Width);
+            var arg2 = Convert.ToInt32(winPosition.Top + screenLocation.FromTop.ThePercentage / 100 * winPosition.Height);
 
-            return RunCommand(ApiComman.MoveMouse, arg1.ToString(), arg2.ToString()) ;
+            return RunCommand(ApiComman.MoveMouse, arg1.ToString(), arg2.ToString());
         }
 
-        public  int ClickLeft()
+        public int ClickLeft(RelativeScreenLocation screenLocation)
         {
-            //var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
-            //var arg2 = screenLocation.FromTop.ThePercentage.ToString();
+            var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
+            var arg2 = screenLocation.FromTop.ThePercentage.ToString();
 
-            return RunCommand(ApiComman.ClickLeft/*, arg1,arg2*/);
+            return RunCommand(ApiComman.ClickLeft, arg1,arg2);
         }
 
-        public int LeftDown()
+        public int LeftDown(RelativeScreenLocation screenLocation)
         {
-            //var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
-            //var arg2 = screenLocation.FromTop.ThePercentage.ToString();
+            var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
+            var arg2 = screenLocation.FromTop.ThePercentage.ToString();
 
-            return RunCommand(ApiComman.LeftMouseDown/*, arg1,arg2*/);
+            return RunCommand(ApiComman.LeftMouseDown, arg1,arg2);
         }
 
-        public int LeftUp()
+        public int LeftUp(RelativeScreenLocation screenLocation)
         {
-            //var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
-            //var arg2 = screenLocation.FromTop.ThePercentage.ToString();
+            var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
+            var arg2 = screenLocation.FromTop.ThePercentage.ToString();
 
             return RunCommand(ApiComman.LeftMouseUp/*, arg1,arg2*/);
         }
 
-        protected int RunCommand(MouseControlApi.ApiComman command, params string [] args)
+        public int RunCommand(MouseControlApi.ApiComman command, params string [] args)
         {
             var result = this.pyAutoGui?.executeApiCommand(apiCommandToActualCommand[command], new List<string>(args));
             return -1; //TODO consider fixing

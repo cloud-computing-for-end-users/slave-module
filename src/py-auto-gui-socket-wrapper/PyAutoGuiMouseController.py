@@ -1,6 +1,5 @@
-
-import sys
 import os
+
 import pyautogui
 import socket
 
@@ -31,26 +30,26 @@ def HandleCommandCall(command):
     if (knownCommands["-mo"] == command):
         #get further data from sys args
         #splitting on space
-        print("trying to move", args)
+        #print("trying to move", args)
         if(3 != len(args)):
             return 1
-        x = int(args[1])
-        y = int(args[2])
+        fromLeft = int(args[1])
+        fromTop = int(args[2])
         #move the mouse
         pyautogui.moveTo(x,y,0)
-        print("finished moving")
+        #print("finished moving")
         return 0
     elif (knownCommands["-cl"] == command):
         #left click
-        pyautogui.leftClick()
+        pyautogui.leftClick(x = fromLeft, y= fromTop)
         return 0
     elif (knownCommands["-ld"] == command):
         #left mouse down
-        pyautogui.mouseDown()
+        pyautogui.mouseDown( x = fromLeft, y= fromTop)
         return 0;
     elif (knownCommands["-lu"] == command):
         #left mouse up
-        pyautogui.mouseUp()
+        pyautogui.mouseUp( x = fromLeft, y= fromTop)
         return 0
     elif (knownCommands["-cr"] == command ):
         #click right mouse button
@@ -69,7 +68,7 @@ def HandleCommandCall(command):
     elif (knownCommands["-lo"] == command):
         #get location of mouse
         currentMouseX, currentMouseY = pyautogui.position()
-        print(currentMouseX," ",currentMouseY,end='')
+        print(currentMouseX," ",currentMouseY,end= '')
         return 0
     #end of switch
     return 1
@@ -87,6 +86,7 @@ serverSocket.listen(5)
 # will only accept one tcp connection at a time
 while True:
     # Establish connection with client.
+
     c, addr = serverSocket.accept()
     print ('Got connection from', addr)
 

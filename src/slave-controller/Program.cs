@@ -13,7 +13,7 @@ namespace slave_controller
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         private static bool IsTesting = false;
-        private const bool IsLocalhost = false;
+        private const bool IsLocalhost = true;
         static void Main(string[] args)
         {
             SetupNLog();
@@ -41,6 +41,7 @@ namespace slave_controller
 
                         Thread.Sleep(5000);
 
+                        /*
                         slaveController.DoMouseAction(new MouseMoveAction()
                         {
                             RelativeScreenLocation = new client_slave_message_communication.model.RelativeScreenLocation()
@@ -55,12 +56,12 @@ namespace slave_controller
                                 }
                             }
                         });
-
+                        */
                         slaveController.DoMouseAction(new LeftMouseDownAction());
 
 
                         Thread.Sleep(2000);
-
+                        /*
                         slaveController.DoMouseAction(new MouseMoveAction()
                         {
                             RelativeScreenLocation = new client_slave_message_communication.model.RelativeScreenLocation()
@@ -77,7 +78,7 @@ namespace slave_controller
                             }
                         });
                         Thread.Sleep(2000);
-
+                        */
                         slaveController.DoMouseAction(new LeftMouseUpAction());
 
                         Thread.Sleep(2000);

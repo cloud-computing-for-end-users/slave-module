@@ -48,7 +48,7 @@ namespace slave_controller
         public static void StartPythonKeyboardControlApi()
         {
             throw new Exception("Path to python file needs to be specified first");
-            var t = new Thread(
+            /*var t = new Thread(
                 () =>
                 {
                     ProcessStartInfo start = new ProcessStartInfo();
@@ -68,7 +68,7 @@ namespace slave_controller
                     //}
                 });
             t.IsBackground = true;
-            t.Start();
+            t.Start();*/
         }
 
         public static void StartPythonScreenCapture()

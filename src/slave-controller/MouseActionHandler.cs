@@ -132,6 +132,7 @@ namespace slave_controller
         protected void HandleMouseAction(BaseMouseAction mouseAction, IntPtr windowHandle)
         {
             var Type = mouseAction.GetType();
+            /*
             if (BaseMouseAction.MouseAction.ClickLeft.ToString().Equals(mouseAction.Action)
                 && mouseAction is ClickLeftAction _clickLeft)
             {
@@ -159,7 +160,8 @@ namespace slave_controller
                     //mouseMoveCounter = ++mouseMoveCounter % (1 + THROW_AWAY_MOUSE_MOVE_EVERY); 
                 }
             }
-            else if (BaseMouseAction.MouseAction.LeftDown.ToString().Equals(mouseAction.Action)
+            
+            else */if (BaseMouseAction.MouseAction.LeftDown.ToString().Equals(mouseAction.Action)
                 && mouseAction is LeftMouseDownAction _leftDown)
             {
 

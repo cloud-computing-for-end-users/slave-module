@@ -25,7 +25,7 @@ namespace slave_controller
         //protected slave_control_api.controlers.KeyboardController keyboardController;
         protected MouseActionHandler mouseActionHandler;
 
-        private static readonly string APP_NAME = "MSPAINTAPP";
+        //private static readonly string APP_NAME = "MSPAINTAPP";
         private IntPtr appWindow;
 
         public SlaveController(Port forMouseControlApi, Port portForRegistrationToRouter, ModuleType moduleType, message_based_communication.encoding.Encoding customEncoding) : base(portForRegistrationToRouter, moduleType, customEncoding)

@@ -22,9 +22,10 @@ namespace window_utility
         public WindowPosition(Rect rect, float scalingFactor)
         {
             int offset = 10;
+            int smallOffset = 1;
             Left = (int)(Convert.ToDouble(rect.Left) * scalingFactor) + offset;
             Right = (int)(Convert.ToDouble(rect.Right) * scalingFactor) - offset;
-            Top = (int)(Convert.ToDouble(rect.Top) * scalingFactor);
+            Top = (int)(Convert.ToDouble(rect.Top) * scalingFactor) + smallOffset;
             Bottom = (int)(Convert.ToDouble(rect.Bottom) * scalingFactor) - offset;
         }
 

@@ -57,7 +57,7 @@ namespace slave_controller
             var applicationDimensions = WindowUtils.GetApplicationSize(appWindow);
             Console.WriteLine("Application dimensions: " + applicationDimensions.ToString());
 
-            PythonStarter.StartPythonScreenCapture();
+            PythonStarter.StartPythonScreenCapture(appWindow);
 
         }
 

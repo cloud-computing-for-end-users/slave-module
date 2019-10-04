@@ -135,7 +135,8 @@ namespace slave_controller
             if (BaseMouseAction.MouseAction.ClickLeft.ToString().Equals(mouseAction.Action)
                 && mouseAction is ClickLeftAction _clickLeft)
             {
-                this.mouseControlApi.ClickLeft(null); // not really used
+                //this.mouseControlApi.ClickLeft(null); // not really used
+                throw new NotImplementedException("Click left not implemented");
             }
             else if (BaseMouseAction.MouseAction.MouseMove.ToString().Equals(mouseAction.Action)
                 && mouseAction is MouseMoveAction _mouseMove)
@@ -162,12 +163,23 @@ namespace slave_controller
                 && mouseAction is LeftMouseDownAction _leftDown)
             {
 
-                this.mouseControlApi.LeftDown(_leftDown.RelativeScreenLocation);
+                this.mouseControlApi.LeftDown(_leftDown.RelativeScreenLocation, windowHandle);
             }
+
             else if (BaseMouseAction.MouseAction.LeftUp.ToString().Equals(mouseAction.Action)
                 && mouseAction is LeftMouseUpAction _leftUp)
             {
-                this.mouseControlApi.LeftUp(_leftUp.RelativeScreenLocation);
+                this.mouseControlApi.LeftUp(_leftUp.RelativeScreenLocation, windowHandle);
+            }
+            else if (BaseMouseAction.MouseAction.RightUp.ToString().Equals(mouseAction.Action)
+                     && mouseAction is RightMouseUpAction _rightUp)
+            {
+                this.mouseControlApi.RightUp(_rightUp.RelativeScreenLocation,windowHandle);
+            }
+            else if (BaseMouseAction.MouseAction.RightDown.ToString().Equals(mouseAction.Action)
+                     && mouseAction is RightMouseDownAction _rightDown)
+            {
+                this.mouseControlApi.RightDown(_rightDown.RelativeScreenLocation, windowHandle);
             }
             else
             {

@@ -26,7 +26,7 @@ namespace slave_controller
                     
                     var slaveCommInfo = new ConnectionInformation()
                     {
-                        IP = new IP() { TheIP = IsLocalhost ? "127.0.0.1" : "10.152.212.28" },
+                        IP = new IP() { TheIP = IsLocalhost ? "127.0.0.1" : "10.152.212.30" },
                         Port = new Port() { ThePort = 10142 }
                     };
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using window_utility;
 
 namespace slave_controller
 {
@@ -18,7 +19,7 @@ namespace slave_controller
         private const string ARGS_FOR_PYTHON_KEYBOARD_CONTROL_API = "";
 
         private static readonly string PATH_TO_PYTHON_SCREEN_CAPTURE = AppContext.BaseDirectory + @"..\..\..\..\pythonScreenCapture\ScreenCapturing.py";
-        private const string ARGS_FOR_PYTHON_SCREEN_CAPTURE = "";
+        //private const string ARGS_FOR_PYTHON_SCREEN_CAPTURE = ""; // gets these at runtime
 
         public static void StartPythonMouseControlApi()
         {
@@ -71,8 +72,17 @@ namespace slave_controller
             t.Start();
         }
 
-        public static void StartPythonScreenCapture()
+        public static void StartPythonScreenCapture(IntPtr windowHandle)
         {
+            var applicationPosition = WindowUtils.GetWindowPosition(windowHandle);
+
+            string ARGS_FOR_PYTHON_SCREEN_CAPTURE = applicationPosition.Left + " "
+                                                        + applicationPosition.Top + " "
+                                                        + applicationPosition.Width + " "
+                                                        + applicationPosition.Height
+                ;
+
+
             var t = new Thread(
                 () =>
                 {

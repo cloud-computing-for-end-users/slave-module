@@ -21,20 +21,27 @@ def HandleCommandCall(command):
         "-cd":6, # click double?
         "-sd":7, # scroll down
         "-su":8, # scroll up
-        "-lo":9  # location of mouse
+        "-lo":9,  # location of mouse
+        "-rd":10, # right mouse button down
+        "-ru": 11,  # right mouse button down
+
     }
 
     command = knownCommands[args[0]]
     #print("number of args: ", len(args))
     # switch
+    fromLeft = -1
+    fromTop = -1
+    if len(args) == 3:
+        fromLeft = int(args[1])
+        fromTop = int(args[2])
+
     if (knownCommands["-mo"] == command):
         #get further data from sys args
         #splitting on space
         #print("trying to move", args)
         if(3 != len(args)):
             return 1
-        fromLeft = int(args[1])
-        fromTop = int(args[2])
         #move the mouse
         pyautogui.moveTo(x,y,0)
         #print("finished moving")
@@ -69,6 +76,16 @@ def HandleCommandCall(command):
         #get location of mouse
         currentMouseX, currentMouseY = pyautogui.position()
         print(currentMouseX," ",currentMouseY,end= '')
+        return 0
+    elif (knownCommands["-rd"] == command):
+        #get location of mouse
+        currentMouseX, currentMouseY = pyautogui.position()
+        pyautogui.mouseDown(button="right", x = fromLeft, y= fromTop)
+        return 0
+    elif (knownCommands["-ru"] == command):
+        #get location of mouse
+        currentMouseX, currentMouseY = pyautogui.position()
+        pyautogui.mouseDown(button="right", x = fromLeft, y= fromTop)
         return 0
     #end of switch
     return 1

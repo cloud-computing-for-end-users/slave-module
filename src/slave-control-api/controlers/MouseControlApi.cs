@@ -17,6 +17,8 @@ namespace slave_control_api.controlers
             ClickLeft,
             LeftMouseDown,
             LeftMouseUp,
+            RightMouseDown,
+            RightMouseUp,
             ClickRight,
             ClickDouble,
             ScrollDown,
@@ -34,6 +36,8 @@ namespace slave_control_api.controlers
             apiCommandToActualCommand.Add(ApiComman.ClickLeft, "-cl");
             apiCommandToActualCommand.Add(ApiComman.LeftMouseDown, "-ld");
             apiCommandToActualCommand.Add(ApiComman.LeftMouseUp, "-lu");
+            apiCommandToActualCommand.Add(ApiComman.RightMouseUp, "-ru");
+            apiCommandToActualCommand.Add(ApiComman.RightMouseDown, "-rd");
 
         }
 
@@ -49,39 +53,58 @@ namespace slave_control_api.controlers
 
         public int MoveMouse(RelativeScreenLocation screenLocation, IntPtr windowHandle)
         {
-            // todo fix
             var winPosition = WindowUtils.GetWindowPosition(windowHandle);
-            var winPosition2 = WindowUtils.GetApplicationSize2(windowHandle);
-
             var arg1 = Convert.ToInt32(winPosition.Left + screenLocation.FromLeft.ThePercentage / 100 * winPosition.Width);
             var arg2 = Convert.ToInt32(winPosition.Top + screenLocation.FromTop.ThePercentage / 100 * winPosition.Height);
 
             return RunCommand(ApiComman.MoveMouse, arg1.ToString(), arg2.ToString());
         }
 
-        public int ClickLeft(RelativeScreenLocation screenLocation)
+        public int ClickLeft(RelativeScreenLocation screenLocation, IntPtr windowHandle)
         {
-            var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
-            var arg2 = screenLocation.FromTop.ThePercentage.ToString();
+            var winPosition = WindowUtils.GetWindowPosition(windowHandle);
+            var arg1 = Convert.ToInt32(winPosition.Left + screenLocation.FromLeft.ThePercentage / 100 * winPosition.Width);
+            var arg2 = Convert.ToInt32(winPosition.Top + screenLocation.FromTop.ThePercentage / 100 * winPosition.Height);
 
-            return RunCommand(ApiComman.ClickLeft, arg1,arg2);
+            return RunCommand(ApiComman.ClickLeft, arg1.ToString(),arg2.ToString());
         }
 
-        public int LeftDown(RelativeScreenLocation screenLocation)
+        public int LeftDown(RelativeScreenLocation screenLocation, IntPtr windowHandle)
         {
-            var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
-            var arg2 = screenLocation.FromTop.ThePercentage.ToString();
+            var winPosition = WindowUtils.GetWindowPosition(windowHandle);
+            var arg1 = Convert.ToInt32(winPosition.Left + screenLocation.FromLeft.ThePercentage / 100 * winPosition.Width);
+            var arg2 = Convert.ToInt32(winPosition.Top + screenLocation.FromTop.ThePercentage / 100 * winPosition.Height);
 
-            return RunCommand(ApiComman.LeftMouseDown, arg1,arg2);
+            return RunCommand(ApiComman.LeftMouseDown, arg1.ToString(),arg2.ToString());
         }
 
-        public int LeftUp(RelativeScreenLocation screenLocation)
+        public int LeftUp(RelativeScreenLocation screenLocation, IntPtr windowHandle)
         {
-            var arg1 = screenLocation.FromLeft.ThePercentage.ToString();
-            var arg2 = screenLocation.FromTop.ThePercentage.ToString();
+            var winPosition = WindowUtils.GetWindowPosition(windowHandle);
+            var arg1 = Convert.ToInt32(winPosition.Left + screenLocation.FromLeft.ThePercentage / 100 * winPosition.Width);
+            var arg2 = Convert.ToInt32(winPosition.Top + screenLocation.FromTop.ThePercentage / 100 * winPosition.Height);
 
-            return RunCommand(ApiComman.LeftMouseUp/*, arg1,arg2*/);
+            return RunCommand(ApiComman.LeftMouseUp, arg1.ToString(),arg2.ToString());
         }
+
+        public int RightDown(RelativeScreenLocation screenLocation, IntPtr windowHandle)
+        {
+            var winPosition = WindowUtils.GetWindowPosition(windowHandle);
+            var arg1 = Convert.ToInt32(winPosition.Left + screenLocation.FromLeft.ThePercentage / 100 * winPosition.Width);
+            var arg2 = Convert.ToInt32(winPosition.Top + screenLocation.FromTop.ThePercentage / 100 * winPosition.Height);
+
+            return RunCommand(ApiComman.RightMouseDown, arg1.ToString(), arg2.ToString());
+        }
+
+        public int RightUp(RelativeScreenLocation screenLocation, IntPtr windowHandle)
+        {
+            var winPosition = WindowUtils.GetWindowPosition(windowHandle);
+            var arg1 = Convert.ToInt32(winPosition.Left + screenLocation.FromLeft.ThePercentage / 100 * winPosition.Width);
+            var arg2 = Convert.ToInt32(winPosition.Top + screenLocation.FromTop.ThePercentage / 100 * winPosition.Height);
+
+            return RunCommand(ApiComman.RightMouseUp, arg1.ToString(),arg2.ToString());
+        }
+
 
         public int RunCommand(MouseControlApi.ApiComman command, params string [] args)
         {

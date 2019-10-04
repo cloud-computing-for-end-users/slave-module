@@ -13,6 +13,12 @@ import time
 # be dequeued and not send
 print(sys.executable)
 
+print(sys.argv)
+
+offsetFromLeft = int(sys.argv[1])
+offsetFromTop = int(sys.argv[2])
+imageWidth = int(sys.argv[3])
+imageHeight = int(sys.argv[4])
 
 ourQueue = queue.Queue()
 
@@ -29,7 +35,7 @@ def threadCaptureScreen():
     while(True):
         for i in range(100):
             fileName = "img/" + str(i) + ".jpg"
-            pyautogui.screenshot( fileName )
+            pyautogui.screenshot( fileName, region=(offsetFromLeft,offsetFromTop,imageWidth,imageHeight) )
            # pyautogui.screenshot()
             ourQueue.put(fileName)
             print("added file name to queue: " + fileName)

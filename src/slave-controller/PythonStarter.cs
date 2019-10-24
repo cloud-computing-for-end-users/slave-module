@@ -12,13 +12,13 @@ namespace slave_controller
     {
         private const string PATH_TO_PYTHON_EXE = "python";
 
-        private static readonly string PATH_TO_PYTHON_MOUSE_CONTROL_API = AppContext.BaseDirectory + @"..\..\..\..\py-auto-gui-socket-wrapper\PyAutoGuiMouseController.py";
+        private static readonly string PATH_TO_PYTHON_MOUSE_CONTROL_API = AppContext.BaseDirectory + @"Resources\PyAutoGuiMouseController.py";
         private const string ARGS_FOR_PYTHON_MOUSE_CONTROL_API = "";
         
         private const string PATH_TO_PYTHON_KEYBOARD_CONTROL_API = "";
         private const string ARGS_FOR_PYTHON_KEYBOARD_CONTROL_API = "";
 
-        private static readonly string PATH_TO_PYTHON_SCREEN_CAPTURE = AppContext.BaseDirectory + @"..\..\..\..\pythonScreenCapture\ScreenCapturing.py";
+        private static readonly string PATH_TO_PYTHON_SCREEN_CAPTURE = AppContext.BaseDirectory + @"Resources\ScreenCapturing.py";
         //private const string ARGS_FOR_PYTHON_SCREEN_CAPTURE = ""; // gets these at runtime
 
         public static void StartPythonMouseControlApi()

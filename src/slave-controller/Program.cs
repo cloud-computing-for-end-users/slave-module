@@ -1,9 +1,16 @@
 ﻿using client_slave_message_communication.model.mouse_action;
-using custom_message_based_implementation.consts;using message_based_communication.model;
+using custom_message_based_implementation.consts;
+using message_based_communication.model;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading;
+using client_slave_message_communication.custom_requests;
+using custom_message_based_implementation.encoding;
 using custom_message_based_implementation.model;
+using message_based_communication.connection;
 using NLog;
+using File = custom_message_based_implementation.model.File;
 
 namespace slave_controller
 {
@@ -19,7 +26,7 @@ namespace slave_controller
 
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        private static bool IsTesting = false;
+        private const bool IsTesting = false;
         private const bool IsLocalhost = true;
         static void Main(string[] args)
         {
@@ -31,15 +38,15 @@ namespace slave_controller
                     Port portToListenForRegistration = new Port(){ThePort = 10143 };
                     var self_conn_info = new ConnectionInformation()
                     {
-                        IP = new IP() { TheIP = IsLocalhost ? "127.0.0.1" : "192.168.137.149" },
+                        IP = new IP() { TheIP = IsLocalhost ? "127.0.0.1" : "10.152.212.42" },
                         Port = new Port() { ThePort = 10142 }
                     };
 
-                    Port portToRegisterOn = new Port() { ThePort = 10123 };
+                    Port portToRegisterOn = new Port() { ThePort = 5523 };
                     var router_conn_info = new ConnectionInformation()
                     {
-                        IP = new IP() { TheIP = IsLocalhost ? "127.0.0.1" : "192.168.137.149" },
-                        Port = new Port() { ThePort = 10122 }
+                        IP = new IP() { TheIP = IsLocalhost ? "127.0.0.1" : "127.0.0.1" },
+                        Port = new Port() { ThePort = 5522 }
                     };
 
 
@@ -84,24 +91,94 @@ namespace slave_controller
                     }
 
 
-
-
-
                     Logger.Info("Slave Controller is starting...");
                     Console.WriteLine("Slave Controller is starting...");
                     
 
-
                     var slaveController = new SlaveController(new Port() { ThePort = 60606 }, portToListenForRegistration, new ModuleType() { TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE }, new client_slave_message_communication.encoding.CustomEncoding());
-                    slaveController.Setup(router_conn_info, portToRegisterOn, self_conn_info, new client_slave_message_communication.encoding.CustomEncoding());
+                    Console.WriteLine("Finished slave controller constructor");
+                    slaveController.Setup(self_conn_info, portToListenForRegistration, self_conn_info, new client_slave_message_communication.encoding.CustomEncoding());
+
+                    var routerProxyHelper = new ProxyHelper();
+                    routerProxyHelper.Setup(router_conn_info, portToRegisterOn, new ModuleType(){TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE}, self_conn_info,slaveController, new CustomEncoder());
+                    slaveController.ServerModuleProxyHelper = routerProxyHelper;
 
                     Console.WriteLine("Slave Controller has started successfully with IP: " + self_conn_info.IP.TheIP);
 
                     if (IsTesting)
                     {
-                        slaveController.Handshake(new PrimaryKey());
+                        //slaveController.HandleRequest(new Handshake()
+                        //{
+                        //    arg1PrimaryKey = new PrimaryKey() { TheKey = -10 }
+                        //    ,SenderModuleID = new ModuleID() { ID = ModuleTypeConst.MODULE_TYPE_CLIENT}
+                        //    , TargetModuleType = new ModuleType() { TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE}
+                        //    , CallID = new CallID() { ID = "-1qdqwdqasdwd0" },
 
-                        Thread.Sleep(5000);
+                        //});
+                        //slaveController.HandleRequest(
+                        //    new FetchRemoteFile()
+                        //    {
+                        //        CallID = new CallID() {ID = "-1qdqwdqwd0"},
+                        //        FileName = "kenneth-test.txt"
+                        //        ,SenderModuleID = new ModuleID() { ID = ModuleTypeConst.MODULE_TYPE_CLIENT}
+                        //        , TargetModuleType = new ModuleType() { TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE}
+                        //    });
+                        //slaveController.HandleRequest( new SaveFilesAndTerminate() {
+                        //        CallID = new CallID() {ID = "-10"}
+                        //        ,SenderModuleID = new ModuleID() { ID = ModuleTypeConst.MODULE_TYPE_CLIENT}
+                        //        , TargetModuleType = new ModuleType() { TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE}
+
+                        //    }
+                        //    );
+
+                        //slaveController.HandleRequest(new FetchRemoteFile() { }});
+                        ////slaveController.FileProxy.UploadFile(
+                        ////    new File()
+                        ////    {
+                        ////        FileName = new FileName() { FileNameProp = "kenneth-test.txt"}
+                        ////        ,FileData = System.IO.File.ReadAllBytes(@"C:\Users\MSI\Desktop\test-kenneth.txt")
+                        ////    }
+                        ////    , new PrimaryKey() { TheKey = -10}
+                        ////    , false
+                        ////    , () => { }
+                        ////    );
+                        ////Console.WriteLine("File sent to file server");
+
+
+                        ////List<FileName> list = null;
+                        ////slaveController.FileProxy.GetListOfFiles(
+                        ////    new PrimaryKey() { TheKey = -10 }
+                        ////    , (obj) => { list = obj;}
+                        ////);
+                        ////while (null == list)
+                        ////{
+                        ////    Thread.Sleep(20);
+                        ////}
+
+                        ////Console.WriteLine("Printing files that are available on server");
+
+                        ////foreach (var fileName in list)
+                        ////{
+
+                        ////    Console.WriteLine("File: " + fileName.FileNameProp);
+                        ////    //retrive files
+                        ////    File file = null;
+                        ////    slaveController.FileProxy.DownloadFile(fileName, new PrimaryKey() { TheKey = -10},
+                        ////        (f) => { file = f;});
+                        ////    while (null == file)
+                        ////    {
+                        ////        Thread.Sleep(10);
+                        ////    }
+                        ////    //save the file
+                        ////    using(var fs = new FileStream(@"C:\Users\MSI\Desktop\" + "file-from-server.txt" , FileMode.Create,FileAccess.Write))
+                        ////    {
+                        ////        fs.Write(file.FileData);
+                        ////        fs.Flush();
+                        ////    }
+                        ////}
+
+
+                        //Thread.Sleep(5000);
 
                         /*
                         slaveController.DoMouseAction(new MouseMoveAction()
@@ -119,10 +196,10 @@ namespace slave_controller
                             }
                         });
                         */
-                        slaveController.DoMouseAction(new LeftMouseDownAction());
+                        //slaveController.DoMouseAction(new LeftMouseDownAction());
 
 
-                        Thread.Sleep(2000);
+                        //Thread.Sleep(2000);
                         /*
                         slaveController.DoMouseAction(new MouseMoveAction()
                         {
@@ -141,9 +218,9 @@ namespace slave_controller
                         });
                         Thread.Sleep(2000);
                         */
-                        slaveController.DoMouseAction(new LeftMouseUpAction());
+                        //slaveController.DoMouseAction(new LeftMouseUpAction());
 
-                        Thread.Sleep(2000);
+                        //Thread.Sleep(2000);
                     }
 
                     Console.WriteLine("Putting main thread to sleep in a loop. Will terminate when reciving SaveFilesAndTerminate command from a client.");

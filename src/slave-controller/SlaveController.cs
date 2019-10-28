@@ -12,6 +12,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using custom_message_based_implementation.proxy;
+using message_based_communication.connection;
 using window_utility;
 using File = custom_message_based_implementation.model.File;
 
@@ -29,15 +30,18 @@ namespace slave_controller
 
         private DirectoryInfo filesDirectory; // this folder is used to store files retrived from the file servermodule
 
+        public ProxyHelper ServerModuleProxyHelper;
+
         private FileServermoduleProxy _fileServermoduleProxy;
 
-        private FileServermoduleProxy FileProxy
+        public FileServermoduleProxy FileProxy
         {
             get
             {
                 if (null == _fileServermoduleProxy)
                 {
-                    _fileServermoduleProxy = new FileServermoduleProxy(this.proxyHelper, this);
+                    _fileServermoduleProxy = new FileServermoduleProxy(ServerModuleProxyHelper, this);
+                    
                 }
                 return _fileServermoduleProxy;
             }
@@ -68,7 +72,7 @@ namespace slave_controller
 
 
             //ensure that a folder is created to store files from the fileserver
-            filesDirectory = Directory.CreateDirectory("ccfeu-files");
+            filesDirectory = Directory.CreateDirectory(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "ccfeu-files");
             //make sure the filesDirectory is empty;
             EmptyDirectory(filesDirectory);
             IsRunning = true;
@@ -99,8 +103,15 @@ namespace slave_controller
             throw new NotImplementedException();
         }
 
+        
+
         public void FetchRemoteFile(string fileName)
         {
+            if (null == connectedClientPK)
+            {
+                Console.WriteLine("can not fetch file before handshake have been called");
+                return;
+            }
             FileProxy.DownloadFile(
                 new FileName(){FileNameProp = fileName}
                 , connectedClientPK
@@ -114,14 +125,19 @@ namespace slave_controller
                     fs.Write(file.FileData);
                 }
             );
+
         }
 
         // this method will only save the files, the terminate myst happen in the handle request after a response have been sent
         public void SaveFilesAndTerminate()
         {
-           // this method only needs to save the files to the file servermodule
-
-           foreach (var file in filesDirectory.GetFiles())
+            // this method only needs to save the files to the file servermodule
+            if (null == connectedClientPK)
+            {
+                Console.WriteLine("can save file before handshake have been called");
+                return;
+            }
+            foreach (var file in filesDirectory.GetFiles())
            {
                FileProxy.UploadFile(
                    new File()
@@ -175,7 +191,7 @@ namespace slave_controller
                 payload = null;
                 var _response = GenerateResponseBasedOnRequestAndPayload(message, payload);
                 SendResponse(_response);
-                IsRunning = false;
+                IsRunning = false; 
                 return;
             }
             else

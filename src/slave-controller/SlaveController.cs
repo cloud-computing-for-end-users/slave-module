@@ -40,7 +40,11 @@ namespace slave_controller
             {
                 if (null == _fileServermoduleProxy)
                 {
-                    _fileServermoduleProxy = new FileServermoduleProxy(ServerModuleProxyHelper, this);
+                    if (null == this.proxyHelper)
+                    {
+                        throw new Exception("proxyHelper null");
+                    }
+                    _fileServermoduleProxy = new FileServermoduleProxy(this.proxyHelper, this);
                     
                 }
                 return _fileServermoduleProxy;

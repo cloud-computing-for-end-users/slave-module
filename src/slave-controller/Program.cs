@@ -97,11 +97,11 @@ namespace slave_controller
 
                     var slaveController = new SlaveController(new Port() { ThePort = 60606 }, portToListenForRegistration, new ModuleType() { TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE }, new client_slave_message_communication.encoding.CustomEncoding());
                     Console.WriteLine("Finished slave controller constructor");
-                    slaveController.Setup(self_conn_info, portToListenForRegistration, self_conn_info, new client_slave_message_communication.encoding.CustomEncoding());
+                    slaveController.Setup(router_conn_info, portToRegisterOn, self_conn_info, new client_slave_message_communication.encoding.CustomEncoding());
 
-                    var routerProxyHelper = new ProxyHelper();
-                    routerProxyHelper.Setup(router_conn_info, portToRegisterOn, new ModuleType(){TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE}, self_conn_info,slaveController, new CustomEncoder());
-                    slaveController.ServerModuleProxyHelper = routerProxyHelper;
+                  //  var routerProxyHelper = new ProxyHelper();
+                    //routerProxyHelper.Setup(router_conn_info, portToRegisterOn, new ModuleType(){TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE}, self_conn_info,slaveController, new CustomEncoder());
+                    //slaveController.ServerModuleProxyHelper = routerProxyHelper;
 
                     Console.WriteLine("Slave Controller has started successfully with IP: " + self_conn_info.IP.TheIP);
 

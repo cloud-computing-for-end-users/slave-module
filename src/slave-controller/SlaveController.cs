@@ -11,6 +11,7 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
+using client_slave_message_communication.encoding;
 using custom_message_based_implementation.proxy;
 using message_based_communication.connection;
 using window_utility;
@@ -45,7 +46,7 @@ namespace slave_controller
                         throw new Exception("proxyHelper null");
                     }
                     _fileServermoduleProxy = new FileServermoduleProxy(this.proxyHelper, this);
-                    
+
                 }
                 return _fileServermoduleProxy;
             }
@@ -56,7 +57,11 @@ namespace slave_controller
         private PrimaryKey connectedClientPK;
         private IntPtr appWindow;
 
-
+        //destructor
+        ~SlaveController()
+        {
+            PythonStarter.KillAllStartedProcesses();
+        }
 
         public SlaveController(Port forMouseControlApi, Port portForRegistrationToRouter, ModuleType moduleType, message_based_communication.encoding.Encoding customEncoding) : base(portForRegistrationToRouter, moduleType, customEncoding)
         {
@@ -107,7 +112,7 @@ namespace slave_controller
             throw new NotImplementedException();
         }
 
-        
+
 
         public void FetchRemoteFile(string fileName)
         {
@@ -117,22 +122,27 @@ namespace slave_controller
                 return;
             }
             FileProxy.DownloadFile(
-                new FileName(){FileNameProp = fileName}
+                new FileName() { FileNameProp = fileName }
                 , connectedClientPK
-                , (file) =>
-                {
-                    var fs = new FileStream(
-                        filesDirectory.FullName + Path.DirectorySeparatorChar + file.FileName.FileNameProp
-                        ,FileMode.Create
-                        ,FileAccess.Write
-                        );
-                    fs.Write(file.FileData);
-                }
-            );
+                , FetchFileCallback
+                );
 
         }
 
-        // this method will only save the files, the terminate myst happen in the handle request after a response have been sent
+        private void FetchFileCallback(File file)
+        {
+            var fs = new FileStream(
+                        filesDirectory.FullName + Path.DirectorySeparatorChar + file.FileName.FileNameProp
+                        , FileMode.Create
+                        , FileAccess.Write
+                        );
+            fs.Write(file.FileData);
+            fs.Flush();
+            fs.Close();
+
+        }
+
+        // this method will return when all the files have been saved, and all the python processes stopped
         public void SaveFilesAndTerminate()
         {
             // this method only needs to save the files to the file servermodule
@@ -141,26 +151,40 @@ namespace slave_controller
                 Console.WriteLine("can save file before handshake have been called");
                 return;
             }
+
+            var fileCounter = filesDirectory.GetFiles().Length;
             foreach (var file in filesDirectory.GetFiles())
-           {
-               FileProxy.UploadFile(
-                   new File()
-                   {
-                      FileData = System.IO.File.ReadAllBytes(file.FullName)
-                      , FileName = new FileName(){FileNameProp = file.Name + "." + file.Extension }
-                   }
-                   , connectedClientPK
-                   , true
-                   , () => { } // empty callback method, as this method returns void
-               );
-           }
+            {
+                FileProxy.UploadFile(
+                    new File()
+                    {
+                        FileData = System.IO.File.ReadAllBytes(file.FullName),
+                        FileName = new FileName() { FileNameProp = file.Name}
+                    }
+                    , connectedClientPK
+                    , true
+                    , () => { fileCounter--; } // empty callback method, as this method returns void
+                );
+            }
+
+            PythonStarter.KillAllStartedProcesses();
+            while (0 != fileCounter)
+            {
+                Console.WriteLine(
+                    "waiting for confirmation on the saving of all images before stopping the slave controller");
+                Thread.Sleep(100); //TODO change this, as i think this will never terminate due to clojure
+            }
         }
+
 
         public override void HandleRequest(BaseRequest message)
         {
+            Logger.Debug("Received request in handle request: " +
+                         message_based_communication.encoding.Encoding.EncodeToJson(message));
             object payload;
             if (message is Handshake _handshake)
             {
+                Console.WriteLine("Received request for handshake");
                 payload = Handshake(_handshake.arg1PrimaryKey);
             }
             else if (message.GetType().IsGenericType)
@@ -169,6 +193,7 @@ namespace slave_controller
                 var gType = typeof(DoMouseAction<BaseMouseAction>).GetGenericTypeDefinition();
                 if (type.Equals(typeof(DoMouseAction<BaseMouseAction>).GetGenericTypeDefinition()))
                 {
+                    Console.WriteLine("Received request DoMouseAction");
                     //TODO see if there is a non dynamic way to do this
                     dynamic mouseAction = message;
                     DoMouseAction(mouseAction.arg1MouseAction);
@@ -181,21 +206,24 @@ namespace slave_controller
             }
             else if (message is GetImageProducerConnectionInfo _getImageProducer)
             {
+                throw new Exception("The GetImageProducerConnectionInfo request is going to be deleted, this should not be called");
                 payload = GetImageProducerConnInfo();
             }
             else if (message is FetchRemoteFile _fetchRemoteFile)
             {
+                Console.WriteLine("Received request FetchRemoteFile");
                 FetchRemoteFile(_fetchRemoteFile.FileName);
                 payload = null;
             }
             else if (message is SaveFilesAndTerminate _saveFilesAndTerminate) // this is a special case
             {
+                Console.WriteLine("Recevied request SaveFilesAndTerminate");
                 // must send the response and set IsRunning to false;
                 SaveFilesAndTerminate();
                 payload = null;
                 var _response = GenerateResponseBasedOnRequestAndPayload(message, payload);
                 SendResponse(_response);
-                IsRunning = false; 
+                IsRunning = false;
                 return;
             }
             else

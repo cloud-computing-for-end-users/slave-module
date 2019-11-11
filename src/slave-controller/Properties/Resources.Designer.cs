@@ -59,5 +59,104 @@ namespace slave_controller.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import os
+        ///
+        ///import pyautogui
+        ///import socket
+        ///
+        ///port = 60600
+        ///
+        ///
+        ///
+        ///
+        ///def HandleCommandCall(command):
+        ///
+        ///    parts = command.split(&quot;;&quot;)
+        ///    key = parts[0].split(&quot;:&quot;)[1]
+        ///    isDown = &quot;true&quot; == (parts[1].split(&quot;:&quot;)[1])
+        ///
+        ///    if(isDown):
+        ///        pyautogui.keyDown(key)
+        ///        return 0
+        ///    else:
+        ///        pyautogui.keyUp(key)
+        ///        return 0
+        ///
+        ///    return 1
+        ///
+        ///serverSocket = socket.socket()
+        ///print (&quot;Socket successfully created&quot;)
+        ///
+        ///serverSocket.bind((&apos;&apos;,port))
+        ///print (&quot;socket binded to: &quot; ,port)
+        ///serverS [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PyAutoGuiKeyboardController {
+            get {
+                return ResourceManager.GetString("PyAutoGuiKeyboardController", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import os
+        ///
+        ///import pyautogui
+        ///import socket
+        ///
+        ///port = 60606
+        ///
+        ///
+        ///
+        ///
+        ///def HandleCommandCall(command):
+        ///
+        ///    args = command.split()
+        ///    #print(&quot;full arg:&quot;, args)
+        ///    knownCommands = {
+        ///        &quot;-mo&quot;:1, # move mouse
+        ///        &quot;-cl&quot;:2, # click left mouse button
+        ///        &quot;-ld&quot;:3, # left mouse button down
+        ///        &quot;-lu&quot;:4, # left mouse button up
+        ///        &quot;-cr&quot;:5, # click right mouse button
+        ///        &quot;-cd&quot;:6, # click double?
+        ///        &quot;-sd&quot;:7, # scroll down
+        ///        &quot;-su&quot;:8, # scroll up
+        ///        &quot;-lo&quot;:9,  # locat [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PyAutoGuiMouseController {
+            get {
+                return ResourceManager.GetString("PyAutoGuiMouseController", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///import sys
+        ///import os
+        ///import pyautogui
+        ///import socket
+        ///import threading
+        ///import queue
+        ///import socket
+        ///import time
+        ///
+        ///# this program will make screnshots, and put them in a sending queue. if there are no images in the sending queue the
+        ///# sending thread will wait and continiouslt check the queue. if there are more than two images in the queue these will
+        ///# be dequeued and not send
+        ///print(sys.executable)
+        ///
+        ///print(sys.argv)
+        ///
+        ///offsetFromLeft = int(sys.argv[1])
+        ///offsetFromTop = int(sys.argv[2])
+        ///imageWidth = [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ScreenCapturing {
+            get {
+                return ResourceManager.GetString("ScreenCapturing", resourceCulture);
+            }
+        }
     }
 }

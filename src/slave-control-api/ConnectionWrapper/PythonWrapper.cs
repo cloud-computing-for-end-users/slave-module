@@ -32,9 +32,12 @@ namespace slave_control_api.ConnectionWrapper
         {
             string fullCommand = command;
 
-            foreach (var item in argsList)
+            if (null != argsList)
             {
-                fullCommand += " " + item;
+                foreach (var item in argsList)
+                {
+                    fullCommand += " " + item;
+                }
             }
 
             var encodedParams = System.Text.Encoding.UTF8.GetBytes(fullCommand);

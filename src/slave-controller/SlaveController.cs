@@ -69,6 +69,8 @@ namespace slave_controller
         {
 
             PythonStarter.StartPythonMouseControlApi();
+            PythonStarter.StartPythonKeyboardControlApi();
+
             Thread.Sleep(10); // the mouse control api must be running before the mouseActionHandler can be instanciated
 
             // FIRST USE THE GetWindowByWindowTitle and GetClassName - when you know the class name, switch to GetWindowByClass
@@ -102,7 +104,7 @@ namespace slave_controller
         }
         public void DoKeyboardAction(string key, bool isDownAction)
         {
-         //keyboardActionHandler.QueueKeyboardCommand();   
+            keyboardActionHandler.QueueKeyboardCommand(new DoKeyboardAction() { Key = key,IsKeyDownAction = isDownAction});
         }
 
         public void DoMouseAction(BaseMouseAction action)
@@ -230,13 +232,21 @@ namespace slave_controller
                 IsRunning = false;
                 return;
             }
+            else if (message is DoKeyboardAction _keyboardAction)
+            {
+                DoKeyboardAction(_keyboardAction.Key, _keyboardAction.IsKeyDownAction);
+                payload = null;
+            }
             else
             {
-                throw new NotImplementedException();
+                throw new NotImplementedException("Unknown method in the HandleRequest switch");
             }
 
             var response = GenerateResponseBasedOnRequestAndPayload(message, payload);
-            SendResponse(response);
+            if (false == Program.IsTesting)
+            {
+                SendResponse(response);
+            }
         }
 
         public Tuple<int, int> Handshake(PrimaryKey pk)

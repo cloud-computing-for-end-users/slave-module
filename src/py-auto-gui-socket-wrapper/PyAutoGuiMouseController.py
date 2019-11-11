@@ -105,7 +105,7 @@ while True:
     # Establish connection with client.
 
     c, addr = serverSocket.accept()
-    print ('Got connection from', addr)
+    print ('Python mouse controller got connection from', addr)
 
     # send a thank you message to the client.
     while True:
@@ -113,7 +113,10 @@ while True:
         print(int(lengthOfData[0]))
         data = c.recv(int(lengthOfData[0]))
         params = data.decode("utf-8")
-        print(params)
+        print("Python mouse controller received command: " + params)
         HandleCommandCall(params)
     # Close the connection with the client
     c.close()
+
+
+

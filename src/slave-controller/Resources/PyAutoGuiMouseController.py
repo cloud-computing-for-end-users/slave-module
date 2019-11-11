@@ -113,7 +113,7 @@ while True:
         print(int(lengthOfData[0]))
         data = c.recv(int(lengthOfData[0]))
         params = data.decode("utf-8")
-        print(params)
+        print("Python mouse controller received: " + params)
         HandleCommandCall(params)
     # Close the connection with the client
     c.close()

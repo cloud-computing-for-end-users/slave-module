@@ -18,11 +18,16 @@ namespace slave_control_api.controlers
 
         public void ExecuteKeyboardAction(DoKeyboardAction keyboardAction)
         {
-            //TODO
-            throw new NotImplementedException();
+            ExecuteCommand(keyboardAction.Key, keyboardAction.IsKeyDownAction);
         }
 
 
+        protected void ExecuteCommand(string key, bool isDownAction)
+        {
+            string command = "key:"+key + ";" + "isDownAction:" + isDownAction.ToString().ToLower();
+            
+            pythonWrapper.executeApiCommand(command);
+        }
 
     }
 }

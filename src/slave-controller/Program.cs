@@ -117,7 +117,7 @@ namespace slave_controller
                         Console.WriteLine("Slave Controller is starting...");
 
 
-                        var slaveController = new SlaveController(new Port() { ThePort = 60606 }, portToListenForRegistration,
+                        var slaveController = new SlaveController(portToListenForRegistration,
                             new ModuleType() { TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE },
                             new client_slave_message_communication.encoding.CustomEncoding());
                         Console.WriteLine("Finished slave controller constructor");

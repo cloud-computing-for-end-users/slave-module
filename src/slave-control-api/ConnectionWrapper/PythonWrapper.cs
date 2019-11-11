@@ -7,24 +7,16 @@ using System.Text;
 
 namespace slave_control_api.ConnectionWrapper
 {
-    public class PythonAutoGUIWrapper
+    public class PythonWrapper
     {
-        //private const string pathToPyFile = @"C:\Users\MSI\PycharmProjects\HelloWorld\HelloWorld.py";
-        //private const string pathToPythonDotExe = @"C:\Users\MSI\AppData\Local\Programs\Python\Python37-32\python.exe";
-
-
-
-
-        //private const int pythonMouseControlApiPort = 60606;
-
         Socket clientSocket = null;
         /// <summary>
         /// will always look for the connection to python on the loopback IP
         /// </summary>
         /// <param name="portWherePythonIs"></param>
-        public PythonAutoGUIWrapper(Port portWherePythonIs)
+        public PythonWrapper(Port portWherePythonIs)
         {
-            //start the python process
+            //start the python process, is now done in pythonStarterClass
 
             clientSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
             clientSocket.Connect(IPAddress.Loopback, portWherePythonIs.ThePort);

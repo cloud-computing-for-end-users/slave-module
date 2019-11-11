@@ -1,6 +1,5 @@
 ﻿using client_slave_message_communication.custom_requests;
 using client_slave_message_communication.interfaces;
-using client_slave_message_communication.model.keyboard_action;
 using client_slave_message_communication.model.mouse_action;
 using custom_message_based_implementation.model;
 using message_based_communication.model;
@@ -28,6 +27,9 @@ namespace slave_controller
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         protected MouseActionHandler mouseActionHandler;
+
+        protected KeyboardActionHandler keyboardActionHandler;
+
 
         private DirectoryInfo filesDirectory; // this folder is used to store files retrived from the file servermodule
 
@@ -63,17 +65,20 @@ namespace slave_controller
             PythonStarter.KillAllStartedProcesses();
         }
 
-        public SlaveController(Port forMouseControlApi, Port portForRegistrationToRouter, ModuleType moduleType, message_based_communication.encoding.Encoding customEncoding) : base(portForRegistrationToRouter, moduleType, customEncoding)
+        public SlaveController(Port portForRegistrationToRouter, ModuleType moduleType, message_based_communication.encoding.Encoding customEncoding) : base(portForRegistrationToRouter, moduleType, customEncoding)
         {
 
             PythonStarter.StartPythonMouseControlApi();
             Thread.Sleep(10); // the mouse control api must be running before the mouseActionHandler can be instanciated
 
-            var pyAutoGui = new PythonAutoGUIWrapper(forMouseControlApi);//TODO FIX, not sure what I mean here anymore
-
             // FIRST USE THE GetWindowByWindowTitle and GetClassName - when you know the class name, switch to GetWindowByClass
             appWindow = WindowUtils.GetWindowHandle(windowTitleText: new Regex("Paint"));
-            this.mouseActionHandler = new MouseActionHandler(new slave_control_api.controlers.MouseControlApi(pyAutoGui), appWindow);
+
+            var pyAutoGuiForMouseControl = new PythonWrapper(new Port(){ThePort = 60606});//TODO FIX, not sure what I mean here anymore
+            this.mouseActionHandler = new MouseActionHandler(pyAutoGuiForMouseControl, appWindow);
+
+            var pyAutoGuiForKeyboardControl = new PythonWrapper(new Port() { ThePort = 60600});
+            this.keyboardActionHandler = new KeyboardActionHandler(pyAutoGuiForKeyboardControl);
 
             WindowUtils.PutWindowOnTop(appWindow);
 
@@ -95,10 +100,9 @@ namespace slave_controller
                 item.Delete();
             }
         }
-
-        public void DoKeyboardAction(BaseKeyboardAction action)
+        public void DoKeyboardAction(string key, bool isDownAction)
         {
-            throw new NotImplementedException();
+         //keyboardActionHandler.QueueKeyboardCommand();   
         }
 
         public void DoMouseAction(BaseMouseAction action)

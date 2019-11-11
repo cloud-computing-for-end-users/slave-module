@@ -41,9 +41,9 @@ namespace slave_control_api.controlers
 
         }
 
-        private PythonAutoGUIWrapper pyAutoGui;
+        private PythonWrapper pyAutoGui;
 
-        public MouseControlApi(PythonAutoGUIWrapper pyAutoGui)
+        public MouseControlApi(PythonWrapper pyAutoGui)
         {
             this.pyAutoGui = pyAutoGui;
 

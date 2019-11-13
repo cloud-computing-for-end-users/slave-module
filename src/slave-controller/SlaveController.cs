@@ -65,7 +65,7 @@ namespace slave_controller
             PythonStarter.KillAllStartedProcesses();
         }
 
-        public SlaveController(Port portForRegistrationToRouter, ModuleType moduleType, message_based_communication.encoding.Encoding customEncoding) : base(portForRegistrationToRouter, moduleType, customEncoding)
+        public SlaveController(Port portForRegistrationToRouter, ModuleType moduleType, message_based_communication.encoding.Encoding customEncoding, string nameOfApplicationToControl) : base(portForRegistrationToRouter, moduleType, customEncoding)
         {
 
             PythonStarter.StartPythonMouseControlApi();
@@ -74,7 +74,7 @@ namespace slave_controller
             Thread.Sleep(10); // the mouse control api must be running before the mouseActionHandler can be instanciated
 
             // FIRST USE THE GetWindowByWindowTitle and GetClassName - when you know the class name, switch to GetWindowByClass
-            appWindow = WindowUtils.GetWindowHandle(windowTitleText: new Regex("Paint"));
+            appWindow = WindowUtils.GetWindowHandle(windowTitleText: new Regex(nameOfApplicationToControl));
 
             var pyAutoGuiForMouseControl = new PythonWrapper(new Port(){ThePort = 60606});//TODO FIX, not sure what I mean here anymore
             this.mouseActionHandler = new MouseActionHandler(pyAutoGuiForMouseControl, appWindow);

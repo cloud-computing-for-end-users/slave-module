@@ -25,6 +25,7 @@ namespace slave_controller
         private const string ROUTER_REG_PORT = "rrp";
         private const string IS_LOCALHOST = "isLocal";
 
+        private const string APPLICATION = "app";
 
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -38,6 +39,9 @@ namespace slave_controller
             {
                 try
                 {
+                    string nameOfApplicationToRun = "Paint";
+
+
                     Port portToListenForRegistration = new Port() { ThePort = 10143 };
                     var self_conn_info = new ConnectionInformation()
                     {
@@ -98,6 +102,11 @@ namespace slave_controller
                             IsLocalhost = Convert.ToBoolean(split[1]);
                             Console.WriteLine("Overriding is localhost with: " + split[1]);
                         }
+                        else if (split[0].Equals(APPLICATION)) // set is localhost
+                        {
+                            nameOfApplicationToRun = split[1];
+                            Console.WriteLine("Overriding nameOfApplicationToRun with: " + split[1]);
+                        }
                     }
 
                     Console.WriteLine("Using locaholhost:" + IsLocalhost);
@@ -116,10 +125,13 @@ namespace slave_controller
                     Logger.Info("Slave Controller is starting...");
                     Console.WriteLine("Slave Controller is starting...");
 
+                    Console.WriteLine("Trying to run application: " + nameOfApplicationToRun);
+
 
                     var slaveController = new SlaveController(portToListenForRegistration,
                         new ModuleType() { TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE },
-                        new client_slave_message_communication.encoding.CustomEncoding());
+                        new client_slave_message_communication.encoding.CustomEncoding()
+                        ,nameOfApplicationToRun);
                     Console.WriteLine("Finished slave controller constructor");
                     slaveController.Setup(router_conn_info, portToRegisterOn, self_conn_info,
                         new client_slave_message_communication.encoding.CustomEncoding());

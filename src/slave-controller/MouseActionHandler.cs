@@ -64,7 +64,6 @@ namespace slave_controller
             if (BaseMouseAction.MouseAction.LeftDown.ToString().Equals(mouseAction.Action)
                     && mouseAction is LeftMouseDownAction _leftDown)
             {
-
                 this.mouseControlApi.LeftDown(_leftDown.RelativeScreenLocation, windowHandle);
             }
 
@@ -82,6 +81,11 @@ namespace slave_controller
                      && mouseAction is RightMouseDownAction _rightDown)
             {
                 this.mouseControlApi.RightDown(_rightDown.RelativeScreenLocation, windowHandle);
+            }
+            else if (BaseMouseAction.MouseAction.MouseMove.ToString().Equals(mouseAction.Action)
+                     && mouseAction is MouseMoveAction _mouseMove)
+            {
+                this.mouseControlApi.MoveMouse(_mouseMove.RelativeScreenLocation, windowHandle);
             }
             else
             {

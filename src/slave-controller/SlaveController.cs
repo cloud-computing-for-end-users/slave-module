@@ -74,7 +74,9 @@ namespace slave_controller
             Thread.Sleep(10); // the mouse control api must be running before the mouseActionHandler can be instanciated
 
             // FIRST USE THE GetWindowByWindowTitle and GetClassName - when you know the class name, switch to GetWindowByClass
+            Console.WriteLine("Getting window handle");
             appWindow = WindowUtils.GetWindowHandle(windowTitleText: new Regex(nameOfApplicationToControl));
+            Console.WriteLine("Got window handle");
 
             var pyAutoGuiForMouseControl = new PythonWrapper(new Port(){ThePort = 60606});//TODO FIX, not sure what I mean here anymore
             this.mouseActionHandler = new MouseActionHandler(pyAutoGuiForMouseControl, appWindow);

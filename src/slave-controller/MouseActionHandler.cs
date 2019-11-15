@@ -89,6 +89,7 @@ namespace slave_controller
             }
             else
             {
+                Logger.Debug("Exception in mouseActionHandler");
                 throw new NotImplementedException("Not implemented in the ");
             }
         }

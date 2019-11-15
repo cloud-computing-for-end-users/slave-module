@@ -43,7 +43,7 @@ def HandleCommandCall(command):
         if(3 != len(args)):
             return 1
         #move the mouse
-        pyautogui.moveTo(x,y,0)
+        pyautogui.moveTo(fromLeft,fromTop,0)
         #print("finished moving")
         return 0
     elif (knownCommands["-cl"] == command):

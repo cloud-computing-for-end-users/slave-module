@@ -125,7 +125,7 @@ namespace slave_controller
                     Logger.Info("Slave Controller is starting...");
                     Console.WriteLine("Slave Controller is starting...");
 
-                    Console.WriteLine("Trying to run application: " + nameOfApplicationToRun);
+                    Console.WriteLine("Running application: " + nameOfApplicationToRun);
 
 
                     var slaveController = new SlaveController(portToListenForRegistration,
@@ -135,6 +135,11 @@ namespace slave_controller
                     Console.WriteLine("Finished slave controller constructor");
                     slaveController.Setup(router_conn_info, portToRegisterOn, self_conn_info,
                         new client_slave_message_communication.encoding.CustomEncoding());
+
+                    Console.WriteLine("Slave Controller has started successfully with IP: " + self_conn_info.IP.TheIP +
+                                      ", Communication port: " + self_conn_info.Port.ThePort
+                                      + ", Registration port: " + portToListenForRegistration.ThePort
+                    );
 
                     //  var routerProxyHelper = new ProxyHelper();
                     //routerProxyHelper.Setup(router_conn_info, portToRegisterOn, new ModuleType(){TypeID = ModuleTypeConst.MODULE_TYPE_SLAVE}, self_conn_info,slaveController, new CustomEncoder());

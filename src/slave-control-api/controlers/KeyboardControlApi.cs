@@ -24,7 +24,8 @@ namespace slave_control_api.controlers
 
         protected void ExecuteCommand(string key, bool isDownAction)
         {
-            string command = "key:"+key + ";" + "isDownAction:" + isDownAction.ToString().ToLower();
+
+            string command = "key!@#"+key + "#@!" + "isDownAction!@#" + isDownAction.ToString().ToLower();
             
             pythonWrapper.executeApiCommand(command);
         }

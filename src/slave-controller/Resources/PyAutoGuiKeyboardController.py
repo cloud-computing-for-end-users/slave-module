@@ -10,9 +10,9 @@ port = 60600
 
 def HandleCommandCall(command):
 
-    parts = command.split(";")
-    key = parts[0].split(":")[1]
-    isDown = "true" == (parts[1].split(":")[1])
+    parts = command.split("#@!")
+    key = parts[0].split("!@#")[1]
+    isDown = "true" == (parts[1].split("!@#")[1])
 
     if(isDown):
         pyautogui.keyDown(key)
